@@ -1,0 +1,30 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap');
+@import "../../../node_modules/antd/dist/antd.css";
+
+*{
+    font-family: 'Poppins', sans-serif;
+}
+
+.header_wrapper{
+    background: #191919;
+    width: 100%;
+
+}
+
+.header_margin{
+    margin-top: 1.5rem;
+    margin-bottom: 1.5rem;
+    color: #191919;
+}
+
+/* .sign-in{
+    color:#858585;
+
+}
+.sign-in:hover{
+    cursor: pointer;
+} */
+
+.search-bar{
+    width: 40%;
+}
