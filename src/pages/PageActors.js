@@ -17,11 +17,11 @@ const PageActors = () => {
         <div>
             <Header/>
             <MovieBanner/>
-            <Row>
+             <Row>
                 <Col span={1}></Col>
                 <Col span={4}><Link to="/overview">Overview</Link></Col>
-                <Col span={4}>Characters</Col>
-                <Col span={4}>Reviews</Col>
+                <Col span={4}><Link to="/actors">Actors</Link></Col>
+                <Col span={4}><Link to="/reviews">Reviews</Link></Col>
             </Row>
             <Row>
                 <Col span={4}>
