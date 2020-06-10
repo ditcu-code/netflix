@@ -21,7 +21,7 @@ const Header = () => {
             style={{
                 fontSize: 16,
                 color: "#858585",
-                background:"#191919"
+                margin:0
             }}
         />
     );
@@ -41,7 +41,7 @@ const Header = () => {
 
     return(
         <div className="header_wrapper">
-            <Row>
+            <Row className="header-items_wrapper">
                 <Col span={4}>
                     <img 
                         className="header_margin"
