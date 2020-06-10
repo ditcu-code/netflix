@@ -28,3 +28,8 @@
 .search-bar{
     width: 40%;
 }
+
+.ant-btn-primary{
+    background: black;
+    border-color: black;
+}

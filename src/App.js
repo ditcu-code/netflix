@@ -1,5 +1,7 @@
 import React from 'react';
+import { Provider } from "react-redux";
 import './App.css';
+import store from "./stores";
 import HomePage from './pages/HomePage';
 import Header from './layout/Header';
 import Footer from './layout/Footer'
@@ -7,14 +9,14 @@ import Footer from './layout/Footer'
 
 function App() {
   return (
-    <div>
-      <Header/>
-      <HomePage/>
-       <Footer/>
-      ssdasss
-      {/* <Routes/> */}
-    </div>
+    <Provider store={store} >
+      <div>
+        <HomePage/>
+        {/* <Routes/> */}
+      </div>
+    </Provider>
   );
 }
 
 export default App;
+
