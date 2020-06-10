@@ -53,10 +53,10 @@ const Footer = () => {
             </Row>
             <Row>
                 <Col span={24}>
-                    <InstagramFilled style={{fontSize: '20px', color: '#858585', margin:"1rem"}} />
-                    <FacebookFilled style={{fontSize: '20px', color: '#858585', margin:"1rem"}} />
-                    <YoutubeFilled style={{fontSize: '20px', color: '#858585', margin:"1rem"}} />
-                    <TwitterOutlined style={{fontSize: '20px', color: '#858585', margin:"1rem"}} />
+                    <InstagramFilled className="socmed-icon" />
+                    <FacebookFilled className="socmed-icon"/>
+                    <YoutubeFilled className="socmed-icon" />
+                    <TwitterOutlined className="socmed-icon" />
                 </Col>
             </Row>
         </div>
