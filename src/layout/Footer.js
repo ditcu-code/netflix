@@ -6,7 +6,7 @@ import {
     YoutubeFilled,
     TwitterOutlined
 } from "@ant-design/icons";
-import "../assets/css/footer.css"
+import "../assets/css/footer.scss"
 
 const Footer = () => {
     return(

@@ -3,14 +3,14 @@ import {BrowserRouter as Router} from "react-router-dom";
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
-import Routes from "./routes/Routes"
+// import Routes from "./routes/Routes"
 import * as serviceWorker from './serviceWorker';
 
 ReactDOM.render(
   <Router>
     <React.StrictMode>
       <App />
-      <Routes/>
+      {/* <Routes/> */}
     </React.StrictMode>
   </Router>,
   document.getElementById('root')
