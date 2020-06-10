@@ -1,4 +1,4 @@
-import { LOGIN_SUCCESS, LOGIN_FAILED } from "../actions/types";
+import { LOGIN_SUCCESS, LOGIN_FAILED, SIGN_OUT } from "../actions/types";
 const initialState = {
   token: localStorage.getItem("token"),
   error: null,
@@ -8,6 +8,7 @@ const initialState = {
 const auth = (state = initialState, action) => {
   switch(action.type) {
     default:
+      cekAuth()
       return {
         ...state
       }
@@ -22,6 +23,20 @@ const auth = (state = initialState, action) => {
         isAuthenticate:false,
         token: localStorage.removeItem("token")
       }
+    case SIGN_OUT:
+    localStorage.clear();
+    return {
+      ...state,
+      token: null
+    }
+  }
+}
+
+const cekAuth = (state = initialState) => {
+  if (initialState.token == null) {
+    initialState.isAuthenticate = false
+  } else {
+    initialState.isAuthenticate = true
   }
 }
 

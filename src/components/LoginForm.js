@@ -6,10 +6,6 @@ import {Button, Input} from "antd";
 
 export default function LoginForm () {
     const dispatch = useDispatch()
-    // const [email, setEmail] = useState("")
-    // const [password, setPassword] = useState("")
-    // const history = useHistory();
-
     // useEffect(() => {
     //     if(user){
     //         history.push('/')
