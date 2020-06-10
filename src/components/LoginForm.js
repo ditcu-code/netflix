@@ -5,7 +5,7 @@ import { login } from "../stores/actions/auth";
 import {Button, Input} from "antd";
 
 export default function LoginForm () {
-    const dispatch = useDispatch()
+    // const dispatch = useDispatch()
     // const [email, setEmail] = useState("")
     // const [password, setPassword] = useState("")
     // const history = useHistory();
@@ -31,7 +31,7 @@ export default function LoginForm () {
     }
     
     const handleLogin = () => {
-          dispatch(login(input))
+        //   dispatch(login(input))
         }
       
 
