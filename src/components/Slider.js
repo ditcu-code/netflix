@@ -1,6 +1,6 @@
 import React from 'react'
 import { Carousel, Row, Col } from 'antd';
-import '../styles/slider.scss'
+import '../assets/css/slider.scss'
 
 const Carou = () => {
     return (

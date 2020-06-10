@@ -1,29 +1,56 @@
-import React, {useState} from "react";
+import React, {useState, useEffect} from 'react';
+// import {useHistory} from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { login } from "../stores/actions/auth";
+import {Button, Input} from "antd";
 
-export const LoginForm = () => {
-    const [login, setLogin] = useState({
-        name: '',
-        password: ''
-    })
+export default function LoginForm () {
+    const dispatch = useDispatch()
+    // const [email, setEmail] = useState("")
+    // const [password, setPassword] = useState("")
+    // const history = useHistory();
 
-    const handleChange = (e) => {
-        setLogin({
+    // useEffect(() => {
+    //     if(user){
+    //         history.push('/')
+    //     }
+    // })
+
+    const [input, setInput] = useState(
+        {
+            email: '',
+            password: '',
+        }
+    )
+
+    const handleInput = e => {
+        setInput({
+            ...input,
             [e.target.name]: e.target.value
         })
     }
-
-    const handleSubmit = e => {
-        e.preventDefault()
-        console.log(login)
-    }
     
+    const handleLogin = () => {
+          dispatch(login(input))
+        }
+      
+
     return (
-        <div>
-            <form onSubmit={handleSubmit} >
-                <input type="name" value={login.name} name='name' placeholder='name' onChange={handleChange} />
-                <input type="password" value={login.password} name='password' placeholder='password' onChange={handleChange} />
-                <input type="submit" />
-            </form>
+        <div className="container-right">
+            <div className="header">Login to Task Manager</div>
+            <div className="content">
+                <div className="form">
+                    <div className="form-group">
+                        <Input type="text" name="email" placeholder="email" onChange={handleInput}/>
+                    </div>
+                    <div className="form-group">
+                        <Input type="password" name="password" placeholder="password" onChange={handleInput}/>
+                    </div>
+                </div>
+            </div>
+            <div className="footer">
+                <Button size="large" type="primary" shape="round" onClick={() => handleLogin()}>LOGIN</Button>
+            </div>
         </div>
     )
 }

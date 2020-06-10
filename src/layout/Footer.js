@@ -18,7 +18,7 @@ const Footer = () => {
             }}
         >
             <Row>
-                <Col span={24} className="footer-logo_margin">
+                <Col className="footer-logo_margin">
                     <img 
                         src={require("../assets/images/Netflix_logo.png")} 
                         alt="netflix"
