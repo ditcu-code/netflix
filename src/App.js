@@ -3,13 +3,13 @@ import { Provider } from "react-redux";
 import './App.css';
 import store from "./stores";
 // import HomePage from './pages/HomePage';
-// import Routes from "./routes/Routes"
+import Routes from "./routes/Routes"
 
 function App() {
   return (
     <Provider store={store} >
       <div>
-        {/* <Routes/> */}
+        <Routes/>
       </div>
     </Provider>
   );
