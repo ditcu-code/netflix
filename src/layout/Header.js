@@ -4,6 +4,7 @@ import {UserOutlined, MailOutlined, LockOutlined, SearchOutlined} from "@ant-des
 import "../assets/css/header.scss"
 import { useDispatch, useSelector } from "react-redux";
 import { login, signOut, register } from "../stores/actions/auth";
+import {getProfile} from "../stores/actions/userdata"
 // import {useHistory} from "react-router-dom";
 
 const Header = () => {
@@ -20,10 +21,17 @@ const Header = () => {
             password: '',
         }
     )
+    const username = useSelector(state => state.userdata.name)
 
-    useEffect(() => {
+    useEffect(() =>{
+        dispatch(getProfile())
+    }, [getProfile])
+
+    useEffect (() => {
         toogleLogin()
-    })
+        
+    },[])
+    
  
     const toogleLogin = () => {
         if(isAuthenticate === false ){
@@ -171,6 +179,7 @@ const Header = () => {
                     />
                 </Col>
                 <Col span={16}>
+                    <button onClick={() => dispatch(getProfile())}>sendhelp</button>
                     <Search
                         placeholder="search movie..."
                         enterButton={suffix}
@@ -190,7 +199,7 @@ const Header = () => {
                                     style={{color:"#858585", cursor:"pointer", display:"flex"}}
                                     onClick={e => e.preventDefault()}>
                                     <Avatar icon={<UserOutlined />} className="avatar" />
-                                    <p className="username">Hi, Username</p>
+                                    <p className="username">Hi, {username}</p>
                                 </div>
                             </Dropdown>
                         )
