@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import {Input, Row, Col, Modal, Menu, Form, Dropdown, Checkbox} from "antd";
+import {Input, Row, Col, Modal, Menu, Form, Dropdown, Checkbox, Avatar} from "antd";
 import {UserOutlined, MailOutlined, LockOutlined, SearchOutlined} from "@ant-design/icons"
 import "../assets/css/header.scss"
 import { useDispatch, useSelector } from "react-redux";
@@ -189,7 +189,8 @@ const Header = () => {
                                     className="ant-dropdown-link header_margin" 
                                     style={{color:"#858585", cursor:"pointer", display:"flex"}}
                                     onClick={e => e.preventDefault()}>
-                                    <UserOutlined/> <p>Hi, username</p>
+                                    <Avatar icon={<UserOutlined />} className="avatar" />
+                                    <p className="username">Hi, Username</p>
                                 </div>
                             </Dropdown>
                         )
