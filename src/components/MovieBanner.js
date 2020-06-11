@@ -6,6 +6,7 @@ import {
     Rate,
     Button
 } from "antd";
+import {PlusOutlined, CaretRightOutlined} from "@ant-design/icons"
 
 const MovieBanner = () => {
     return(
@@ -13,7 +14,7 @@ const MovieBanner = () => {
             <Row className="banner-title">
                 <Col span={1}></Col>
                 <Col span={4}>
-                    <h3 className="banner-text">JOJO RABBIT</h3>
+                    <h3 className="banner-text">Jojo Rabbit</h3>
                 </Col>
                 <Col flex="auto"></Col>
             </Row>
@@ -41,10 +42,10 @@ const MovieBanner = () => {
             <Row>
                 <Col span={1}></Col>
                 <Col> 
-                    <Button className="banner-btn" type="primary" size="large">Watch Trailer</Button>
+                    <Button className="banner-btn btn-trailer" size="large"><CaretRightOutlined/>Trailer</Button>
                 </Col>
                 <Col> 
-                    <Button className="banner-btn" size="large">Add to Watchlist</Button>
+                    <Button className="banner-btn btn-watchlist" size="large"><PlusOutlined/>Watchlist</Button>
                 </Col>
             </Row>
         </div>

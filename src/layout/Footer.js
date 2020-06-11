@@ -13,7 +13,6 @@ const Footer = () => {
         <div 
             className="footer_wrapper"
             style={{
-                background:"#191919",
                 width: "100%"
             }}
         >
