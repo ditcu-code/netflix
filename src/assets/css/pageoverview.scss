@@ -12,8 +12,25 @@
     color: white;
 }
 
+h3{
+    font-size: 2rem;
+    text-transform: uppercase;
+}
+
 .banner-title{
     padding-top: 8rem;
+}
+
+.content-wrapper{
+    background-color: #191919;
+    color: white;
+    padding-bottom: 1rem;
+    padding-top: 1rem;
+}
+
+.content-divider{
+    padding-left: 4rem;
+    padding-right: 4rem;
 }
 
 .content-text{
@@ -24,5 +41,37 @@
 .banner-btn{
     margin-right: 2rem;
     outline: none;
-    border: none;
+    background: none;
+    border: 2px solid;
+    border-radius: 7px;
+    width: 8rem;
+}
+
+.btn-trailer{
+    border-color:#E50914;
+    box-shadow: 1px 1px 6px #E50914;
+    color: #E50914;
+}
+
+.btn-trailer:hover{
+    background: none;
+    border-color:#E50914;
+    color: white;
+    transition: 0.3s ease;
+    background-color: #E50914;
+}
+
+.btn-watchlist{
+    border-color: white;
+    color: white;
+}
+
+.btn-watchlist:hover{
+    border-color: white;
+    color: #858585;
+    transition: 0.3s ease;
+}
+
+.btn-trailer:active, .btn-watchlist:active{
+    transform: translateY(5px);
 }
