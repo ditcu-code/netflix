@@ -19,7 +19,7 @@ const MovieCards = () => {
     
     useEffect(() => {
         dispatch(movieList())
-      }, [])
+      })
 
 
     const handleChange = item => {

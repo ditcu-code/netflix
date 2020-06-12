@@ -27,9 +27,9 @@ const Header = () => {
     // }, [getProfile])
     
     useEffect (() => {
-        dispatch(getProfile())
+        // dispatch(getProfile())
         toogleLogin()
-    },[])
+    })
     
  
     const toogleLogin = () => {
@@ -38,6 +38,7 @@ const Header = () => {
         } 
         else{
             console.log("token ada", isAuthenticate, username)
+            dispatch(getProfile())
         }
     }
 

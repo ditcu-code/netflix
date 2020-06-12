@@ -12,10 +12,10 @@
         color: #ffffff;
     }
     .ant-card-hoverable:hover {
-        transition: .9s ;
         transform: scale(1.2);
     }
     .ant-card {
+        transition: .9s ;
         width: 175px;
         height: 200px;
         background-color: #191919;
