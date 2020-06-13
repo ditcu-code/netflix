@@ -1,10 +1,9 @@
-const baseUrl = "https://reviewmoviedatabase.herokuapp.com/api/v1";
-
+const baseUrl = 'https://ga-moviereview.herokuapp.com/api/v1';
 
 export const movieList = () => async dispatch => {
   try {
     const getMovieRes = await fetch(
-      `${baseUrl}/movies/searchall?limit=50&page=1`,
+      `${baseUrl}/movie/?limit=5&page=1`,
       {
         method: "GET",
         headers: {
@@ -14,9 +13,10 @@ export const movieList = () => async dispatch => {
       }
     );
     const dataMovie = await getMovieRes.json();
+    console.log('movielist', dataMovie)
     dispatch({
       type: "GET_MOVIES",
-      payload: dataMovie.data.docs
+      payload: dataMovie.data
     });
   } catch (error) {
     console.log(error);

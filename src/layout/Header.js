@@ -15,26 +15,19 @@ const Header = () => {
     const [modalLogin, setModalLogin] = useState(false)
     const [modalRegister, setModalRegister] = useState(false)
     const isAuthenticate = useSelector(state => state.auth.isAuthenticate)
+    const userdata = useSelector(state => state.userdata.profile)
     const [input, setInput] = useState(
         {
             email: '',
             password: '',
         }
     )
-    const userdata = useSelector(state => state.userdata.profile)
-
-    useEffect(() =>{
-        dispatch(getProfile())
-    }, [getProfile])
-
-    // useEffect (() => {
-    //     toogleLogin()
-        
-    // },[])
-
-    console.log("userdata", userdata)
     
- 
+    useEffect (() => {
+        dispatch(getProfile())
+        toogleLogin()
+    })
+    
     const toogleLogin = () => {
         if(isAuthenticate === false ){
             console.log("token tidak ada", isAuthenticate)
@@ -81,9 +74,6 @@ const Header = () => {
         }}
         />
     );
-        
-    // const onClick = ({ key }) => {
-    // };
         
     const ProfileMenu = (
         <Menu>
