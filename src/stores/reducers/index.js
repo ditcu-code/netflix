@@ -1,10 +1,12 @@
 import { combineReducers } from "redux";
 import auth from "./auth";
-import movies from './movies'
-import userdata from "./userdata"
+import userdata from "./userdata";
+import movies from "./movies";
+import updateProfile from "./updateprofile";
 
 export default combineReducers({
-  auth,
+  auth, 
+  userdata,
   movies,
-  userdata
+  updateProfile
 });

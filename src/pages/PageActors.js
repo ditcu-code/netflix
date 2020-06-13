@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect} from "react";
 import "../assets/css/pageoverview.scss";
 import {Link} from "react-router-dom";
 import {
@@ -10,8 +10,19 @@ import "../../node_modules/antd/dist/antd.css"
 import Header from "../layout/Header";
 import Footer from "../layout/Footer";
 import MovieBanner from "../components/MovieBanner"
+// import {getMovies} from "../stores/actions/movies"
+import { useDispatch, useSelector } from "react-redux";
+
 
 const PageActors = () => {
+    // const dispatch = useDispatch()
+    
+    // const movieImage = useSelector(state => state.movieImage.photo)
+
+    // useEffect(() => {
+    //     dispatch(getMovies())
+    // }, [getMovies])
+
     const Meta= Card;
     return(
         <div>
@@ -23,40 +34,18 @@ const PageActors = () => {
                 <Col span={4}><Link to="/actors">Actors</Link></Col>
                 <Col span={4}><Link to="/reviews">Reviews</Link></Col>
             </Row>
-            <Row>
-                <Col span={4}>
-                    <Card
-                        hoverable
-                        style={{ width: 240 }}
-                        cover={<img alt="example" src="https://os.alipayobjects.com/rmsportal/QBnOOoLaAfKPirc.png" />}>
-                        <Meta title="random girl" description="Hitler" />
-                    </Card>
-                </Col>
-                <Col span={4}>
-                    <Card
-                        hoverable
-                        style={{ width: 240 }}
-                        cover={<img alt="example" src="https://os.alipayobjects.com/rmsportal/QBnOOoLaAfKPirc.png" />}>
-                        <Meta title="random girl" description="Jojo"/>
-                    </Card>
-                </Col>
-                <Col span={4}>
-                    <Card
-                        hoverable
-                        style={{ width: 240 }}
-                        cover={<img alt="example" src="https://os.alipayobjects.com/rmsportal/QBnOOoLaAfKPirc.png" />}>
-                        <Meta title="random girl" description="Jojo's mum"/>
-                    </Card>
-                </Col>
-                <Col span={4}>
-                    <Card
-                        hoverable
-                        style={{ width: 240 }}
-                        cover={<img alt="example" src="https://os.alipayobjects.com/rmsportal/QBnOOoLaAfKPirc.png" />}>
-                        <Meta title="random girl" description="Jewish girl"/>
-                    </Card>
-                </Col>
-            </Row>
+            {/* <Row>
+                {movieImage.map(item =>
+                    <Col span={4}>
+                        <Card
+                            hoverable
+                            style={{ width: 240 }}
+                            cover={<img alt="example" src={item.url} />}>
+                            <Meta title={item.id} description={item.title} />
+                        </Card>
+                    </Col>
+                )}
+            </Row> */}
             <Footer/>
         </div>
     )
