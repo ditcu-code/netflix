@@ -10,18 +10,18 @@ import "../../node_modules/antd/dist/antd.css"
 import Header from "../layout/Header";
 import Footer from "../layout/Footer";
 import MovieBanner from "../components/MovieBanner"
-import {getMovies} from "../stores/actions/movies"
+// import {getMovies} from "../stores/actions/movies"
 import { useDispatch, useSelector } from "react-redux";
 
 
 const PageActors = () => {
-    const dispatch = useDispatch()
+    // const dispatch = useDispatch()
     
-    const movieImage = useSelector(state => state.movieImage.photo)
+    // const movieImage = useSelector(state => state.movieImage.photo)
 
-    useEffect(() => {
-        dispatch(getMovies())
-    }, [getMovies])
+    // useEffect(() => {
+    //     dispatch(getMovies())
+    // }, [getMovies])
 
     const Meta= Card;
     return(
@@ -34,7 +34,7 @@ const PageActors = () => {
                 <Col span={4}><Link to="/actors">Actors</Link></Col>
                 <Col span={4}><Link to="/reviews">Reviews</Link></Col>
             </Row>
-            <Row>
+            {/* <Row>
                 {movieImage.map(item =>
                     <Col span={4}>
                         <Card
@@ -45,7 +45,7 @@ const PageActors = () => {
                         </Card>
                     </Col>
                 )}
-            </Row>
+            </Row> */}
             <Footer/>
         </div>
     )
