@@ -33,9 +33,23 @@ export const getMovieById = id => async dispatch => {
       }
     });
     let data = await res.json();
+    // console.log('getMovieId', data.data)
     dispatch({
       type: "GET_ID",
       payload: data.data
+    });
+    const cast = await fetch(`${baseUrl}/movie/${id}/actor`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json"
+      }
+    });
+    let castdata = await cast.json();
+    // console.log('getMovieId', data.data)
+    dispatch({
+      type: "GET_ACTORS",
+      payload: castdata.data
     });
   } catch (error) {
     console.log(error);
@@ -63,7 +77,6 @@ export const getGenres = id => async dispatch => {
 };
 
 export const getMoviesByGenre = genreId => async dispatch => {
-  console.log('kepanggil')
   try {
     const res = await fetch(`${baseUrl}/movie/genre/${genreId}`, {
       method: "GET",

@@ -7,8 +7,6 @@ import {
     Card
 } from "antd";
 import "../../node_modules/antd/dist/antd.css"
-import Header from "../layout/Header";
-import Footer from "../layout/Footer";
 import MovieBanner from "../components/MovieBanner"
 // import {getMovies} from "../stores/actions/movies"
 import { useDispatch, useSelector } from "react-redux";
@@ -26,7 +24,6 @@ const PageActors = () => {
     const Meta= Card;
     return(
         <div>
-            <Header/>
             <MovieBanner/>
              <Row>
                 <Col span={1}></Col>
@@ -46,7 +43,6 @@ const PageActors = () => {
                     </Col>
                 )}
             </Row> */}
-            <Footer/>
         </div>
     )
 }

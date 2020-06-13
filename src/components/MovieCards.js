@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import '../assets/css/movieCards.scss'
 import Title from "antd/lib/typography/Title";
 import { TagsOutlined } from "@ant-design/icons";
-import {useParams} from "react-router-dom";
+import {useParams, Link} from "react-router-dom";
 const { Meta } = Card;
 const { TabPane } = Tabs;
 
@@ -54,26 +54,28 @@ const MovieCards = () => {
       dispatch(getMoviesByGenre(key))
     }
 
-    console.log('KEYS', genreId, moviebygenre.length)
+    // console.log('KEYS', genreId, moviebygenre.length)
 
     const movieItem = movies.map(item => 
+          <Link to={`/overview/${item.id}`} key={item.id} >
             <Card
-                key={item.id}
                 hoverable
                 cover={<img alt={item.title} src={item.Images[0].url} />}
-            >
+                >
                 <Meta title={item.title} description={item.releaseDate.slice(0,4)} />
             </Card>
+          </Link>
     );
 
     const moviebygenreItem = moviebygenre.map(item => 
-      <Card
-          key={item.id}
-          hoverable
-          cover={<img alt={item.title} src={item.Images[0].url} />}
-      >
-          <Meta title={item.title} description='cek' />
-      </Card>
+      <Link to={`/overview/${item.id}`} key={item.id} >
+        <Card
+            hoverable
+            cover={<img alt={item.title} src={item.Images[0].url} />}
+        >
+          <Meta title={item.title} description={item.releaseDate} />
+        </Card>
+      </Link>
     );
 
 

@@ -1,0 +1,17 @@
+@mixin tabs {
+    .ant-tabs{
+        color: #858585;
+    }
+    .ant-tabs-tab{
+        font-size: 1.1em;
+        transition: 0.2s;
+    }
+    .ant-tabs-tab-active{
+        color: #E50914;        
+    }
+    .ant-tabs-ink-bar{
+        background: #E50914;        
+    }
+    .ant-tabs-tab:hover{
+        color: #ffffff;
+}}

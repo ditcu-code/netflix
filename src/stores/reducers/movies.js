@@ -1,6 +1,7 @@
 const initialState = {
     movies: [],
-    movieId: {},
+    movieId: [],
+    actors: [],
     genres: [],
     moviebygenre: [],
     error: null
@@ -14,6 +15,11 @@ const initialState = {
           ...state,
           movies: payload
         };
+      case "GET_ID":
+        return {
+          ...state,
+          movieId: payload,
+        };  
       case "GET_GENRES":
         return {
           ...state,
@@ -24,6 +30,11 @@ const initialState = {
           ...state,
           moviebygenre: payload
         };  
+      case "GET_ACTORS":
+        return {
+          ...state,
+          actors: payload
+        };    
       default:
         return { ...state };
     }
