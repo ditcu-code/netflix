@@ -1,10 +1,10 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect,} from 'react';
 import {Input, Row, Col, Modal, Menu, Form, Dropdown, Checkbox, Avatar} from "antd";
 import {UserOutlined, MailOutlined, LockOutlined, SearchOutlined} from "@ant-design/icons"
 import "../assets/css/header.scss"
 import { useDispatch, useSelector } from "react-redux";
 import { login, signOut, register } from "../stores/actions/auth";
-import {getProfile} from "../stores/actions/auth"
+import {getProfile} from "../stores/actions/userdata"
 // import {useHistory} from "react-router-dom";
 
 const Header = () => {
@@ -21,18 +21,18 @@ const Header = () => {
             password: '',
         }
     )
-    const username = useSelector(state => state.userdata.profile)
+    const userdata = useSelector(state => state.userdata.profile)
 
-    // useEffect(() =>{
-    //     dispatch(getProfile())
-    // }, [getProfile])
+    useEffect(() =>{
+        dispatch(getProfile())
+    }, [getProfile])
 
     // useEffect (() => {
     //     toogleLogin()
         
     // },[])
 
-    console.log("username", username)
+    console.log("userdata", userdata)
     
  
     const toogleLogin = () => {
@@ -87,7 +87,10 @@ const Header = () => {
         
     const ProfileMenu = (
         <Menu>
-            <Menu.Item key="1">Profile</Menu.Item>
+            <Menu.Item key="1">
+                <a rel="noopener noreferrer" href="/profile">
+                    Profile</a>
+            </Menu.Item>
             <Menu.Item key="2">Settings</Menu.Item>
             <Menu.Item key="3">Help</Menu.Item>
             <Menu.Item key="4" onClick={handleSignOut} >Sign out</Menu.Item>
@@ -200,8 +203,8 @@ const Header = () => {
                                     className="ant-dropdown-link header_margin" 
                                     style={{color:"#858585", cursor:"pointer", display:"flex"}}
                                     onClick={e => e.preventDefault()}>
-                                    <Avatar icon={<UserOutlined />} className="avatar" />
-                                    <p className="username">Hi, {username? username.name : ""}</p>
+                                    <Avatar src={userdata? userdata.image : <UserOutlined/>} className="avatar" />
+                                    <p className="username">Hi, {userdata? userdata.name : ""}</p>
                                 </div>
                             </Dropdown>
                         )
