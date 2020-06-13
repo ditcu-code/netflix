@@ -1,5 +1,5 @@
 import React from 'react'
-import { Carousel, Row, Col } from 'antd';
+import { Carousel } from 'antd';
 import '../assets/css/slider.scss'
 
 const Carou = () => {

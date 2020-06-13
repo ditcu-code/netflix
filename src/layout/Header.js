@@ -27,7 +27,7 @@ const Header = () => {
     // }, [getProfile])
     
     useEffect (() => {
-        // dispatch(getProfile())
+        dispatch(getProfile())
         toogleLogin()
     })
     
