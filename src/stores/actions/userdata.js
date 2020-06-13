@@ -4,6 +4,9 @@ const baseUrl = "https://ga-todoapps.herokuapp.com/api/v1";
 let token = localStorage.getItem("token")
 
 export const getProfile = () => async dispatch => {
+    if (token === null) {        
+        window.location.reload()
+    }
     try{
         const res = await axios.get(`${baseUrl}/user/profile`, {
             headers: {

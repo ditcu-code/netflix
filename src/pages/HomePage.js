@@ -1,6 +1,7 @@
 import React from 'react'
-import Slider from '../components/Slider'
 import Header from '../layout/Header'
+import Slider from '../components/Slider'
+import MovieCards from '../components/MovieCards'
 import Footer from '../layout/Footer'
 
 const HomePage = () => {
@@ -8,6 +9,7 @@ const HomePage = () => {
         <div>
             <Header/>
             <Slider/>
+            <MovieCards/>
             <Footer/>
         </div>
     )

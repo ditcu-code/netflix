@@ -23,22 +23,22 @@ const Header = () => {
     )
     const username = useSelector(state => state.userdata.name)
 
-    useEffect(() =>{
-        dispatch(getProfile())
-    }, [getProfile])
-
+    // useEffect(() =>{
+    // }, [getProfile])
+    
     useEffect (() => {
+        // dispatch(getProfile())
         toogleLogin()
-        
-    },[])
+    })
     
  
     const toogleLogin = () => {
         if(isAuthenticate === false ){
-            console.log("token tidak ada", isAuthenticate)
+            console.log("token tidak ada", isAuthenticate, username)
         } 
         else{
-            console.log("token ada", isAuthenticate)
+            console.log("token ada", isAuthenticate, username)
+            dispatch(getProfile())
         }
     }
 
@@ -60,7 +60,6 @@ const Header = () => {
         setModalRegister(false)
         // props.history.push('/')
     }
-
     
     const handleSignOut = () => {
         dispatch(signOut())
@@ -179,7 +178,6 @@ const Header = () => {
                     />
                 </Col>
                 <Col span={16}>
-                    <button onClick={() => dispatch(getProfile())}>sendhelp</button>
                     <Search
                         placeholder="search movie..."
                         enterButton={suffix}
