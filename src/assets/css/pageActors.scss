@@ -1,0 +1,40 @@
+.ant-card-actors{
+    display: inline-block;
+    width: 100%;
+    padding-top: 1em;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    .ant-card-meta-title {
+        font-size: 1em;
+        margin-bottom: 3px !important;
+        color: #ffffff;
+    }
+    .ant-card-meta-description {
+        font-size: 1em;
+        color: #ffffff;
+    }
+    .ant-card-hoverable:hover {
+        transform: scale(1.2);
+    }
+    .ant-card {
+        transition: .8s ;
+        width: 120px;
+        height: 220px;
+        background-color: #191919;
+        border: none;
+        font-size: 10px;
+        box-shadow: none;
+        padding: 10px;
+    }
+    .ant-card-body{
+        text-align: center;
+        padding: 1em 0;
+    }
+    .ant-card-cover {
+        img{
+            border-radius: 10px;
+        }
+    }
+}

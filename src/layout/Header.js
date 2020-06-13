@@ -5,6 +5,7 @@ import "../assets/css/header.scss"
 import { useDispatch, useSelector } from "react-redux";
 import { login, signOut, register } from "../stores/actions/auth";
 import {getProfile} from "../stores/actions/userdata"
+import {Link} from "react-router-dom";
 // import {useHistory} from "react-router-dom";
 
 const Header = () => {
@@ -165,12 +166,14 @@ const Header = () => {
         <div className="header_wrapper">
             <Row className="header-items_wrapper">
                 <Col span={4}>
+                    <Link to='/' >                   
                     <img 
                         className="header_margin"
                         src={require("../assets/images/Netflix_logo.png")}
                         style={{width:"50%"}}
                         alt="netflix"
                     />
+                    </Link>
                 </Col>
                 <Col span={16}>
                     <Search

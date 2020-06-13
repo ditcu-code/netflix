@@ -1,41 +1,37 @@
-import React, {useEffect} from "react";
+import React, {useState ,useEffect} from "react";
 import "../assets/css/pageoverview.scss";
 import {useParams} from "react-router-dom";
 import {
-    Row, 
     Col, 
     Divider,
     Tabs,
 } from "antd";
 import "../../node_modules/antd/dist/antd.css"
 import MovieBanner from "../components/MovieBanner"
+import PageActors from '../components/PageActors'
 import { getMovieById } from '../stores/actions/movies';
 import { useSelector, useDispatch } from "react-redux";
 const { TabPane } = Tabs;
 
 const PageOverview = () => {
     const movieDetail = useSelector(state => state.movies.movieId)
-    const actorsDetail = useSelector(state => state.movies.actors)
+    // const actorsDetail = useSelector(state => state.movies.actors)
+    const [IdChange, setIdChange] = useState(false) //aku bikin ini biar ga looping
     const dispatch = useDispatch()
-    const { id } = useParams() //ini buat nge get id dari url, next cek line 28
+    let { id } = useParams() //ini buat nge get id dari url, ingat gunakan let karena dinamis, next cek line 27
 
     const callback = (key) => { //ini buat tabs berfungsi
         console.log(key)
     }
 
     useEffect(() => {
-        if (movieDetail.length <= 0) { //ketika pertama kali di load dia ngecek dulu moviedetail ada atau ngga, ini buat mencegah looping
-          dispatch(getMovieById(id)) //id nya bonceng dispatch
+        if (IdChange === false) { //aku bikin ini biar ga looping
+            dispatch(getMovieById(id)) //id nya bonceng dispatch 
+            setIdChange(!!setIdChange)
         }
         })
 
-    console.log(id, movieDetail.synopsis, movieDetail.length, actorsDetail)
-
-    // const actorItem = actorsDetail.map(item => //sok boleh diganti
-    //     <p key={item.id} >
-    //         {item.name}
-    //     </p>
-    // );
+    // console.log(id, IdChange)
 
     return(
         <div>
@@ -74,7 +70,7 @@ const PageOverview = () => {
                             </div>
                         </TabPane>
                         <TabPane tab='Cast' key='2'>
-                            {/* {actorItem} */}
+                            <PageActors/>
                         </TabPane>
                         <TabPane tab='Reviews' key='3'>
                             <h1>isi sendiri :p</h1>

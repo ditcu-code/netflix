@@ -79,7 +79,7 @@ const MovieCards = () => {
     );
 
 
-    // console.log('genres', genres)
+    // console.log('genres', moviebygenre)
 
     // console.log('movies', movies)
 

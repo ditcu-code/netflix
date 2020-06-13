@@ -1,48 +1,26 @@
 import React, {useEffect} from "react";
-import "../assets/css/pageoverview.scss";
-import {Link} from "react-router-dom";
+import "../assets/css/pageActors.scss";
 import {
-    Row, 
     Col, 
     Card
 } from "antd";
-import "../../node_modules/antd/dist/antd.css"
-import MovieBanner from "../components/MovieBanner"
-// import {getMovies} from "../stores/actions/movies"
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
+const {Meta} = Card;
 
+const PageActors = () => {    
+    const actorsDetail = useSelector(state => state.movies.actors)
 
-const PageActors = () => {
-    // const dispatch = useDispatch()
-    
-    // const movieImage = useSelector(state => state.movieImage.photo)
+    const actorCards = actorsDetail.map(item =>
+        <Card key = {item.id}
+            hoverable
+            cover={<img alt={item.name} src={item.Image.url} />}>
+            <Meta title={item.name} description={item.character} />
+        </Card>
+    )
 
-    // useEffect(() => {
-    //     dispatch(getMovies())
-    // }, [getMovies])
-
-    const Meta= Card;
     return(
-        <div>
-            <MovieBanner/>
-             <Row>
-                <Col span={1}></Col>
-                <Col span={4}><Link to="/overview">Overview</Link></Col>
-                <Col span={4}><Link to="/actors">Actors</Link></Col>
-                <Col span={4}><Link to="/reviews">Reviews</Link></Col>
-            </Row>
-            {/* <Row>
-                {movieImage.map(item =>
-                    <Col span={4}>
-                        <Card
-                            hoverable
-                            style={{ width: 240 }}
-                            cover={<img alt="example" src={item.url} />}>
-                            <Meta title={item.id} description={item.title} />
-                        </Card>
-                    </Col>
-                )}
-            </Row> */}
+        <div className='ant-card-actors'>
+            {actorCards}
         </div>
     )
 }
