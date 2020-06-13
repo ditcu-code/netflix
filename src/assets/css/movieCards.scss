@@ -1,0 +1,40 @@
+.movieCards{
+    background-color: #191919;
+    padding: 8em 4.5em 12em 4.5em;
+    display: grid;
+    grid-template-columns: repeat(6, 12rem);
+    grid-auto-rows: auto;
+    grid-gap: 12rem 1rem;
+    .ant-card-meta-title {
+        color: #ffffff;
+    }
+    .ant-card-meta-description {
+        color: #ffffff;
+    }
+    .ant-card-hoverable:hover {
+        transform: scale(1.2);
+    }
+    .ant-card {
+        transition: .9s ;
+        width: 175px;
+        height: 200px;
+        background-color: #191919;
+        border: none;
+        font-size: 10px;
+        border-radius: 10px;
+    }
+    .ant-card-body{
+        padding: 18px 1px;
+    }
+    .ant-card-cover {
+        img{
+            border-radius: 10px;
+        }
+    }
+}
+
+.moviePagination{
+    background-color: #191919;
+    text-align: center;
+    padding: 2em 0 3em 0;
+}

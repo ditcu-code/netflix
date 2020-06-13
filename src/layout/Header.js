@@ -41,6 +41,7 @@ const Header = () => {
         } 
         else{
             console.log("token ada", isAuthenticate)
+            dispatch(getProfile())
         }
     }
 
@@ -63,7 +64,6 @@ const Header = () => {
         setModalRegister(false)
         // props.history.push('/')
     }
-
     
     const handleSignOut = () => {
         dispatch(signOut())

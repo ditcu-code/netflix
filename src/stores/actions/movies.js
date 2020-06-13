@@ -1,18 +1,43 @@
-import {GET_MOVIES} from "./types";
-import axios from "axios";
-const baseUrl = "https://jsonplaceholder.typicode.com/photos";
+const baseUrl = "https://reviewmoviedatabase.herokuapp.com/api/v1";
 
-export const getMovies = () => async dispatch => {
-    try{
-        const res = await axios.get(`${baseUrl}?_limit=12`)
-        dispatch({
-            type: GET_MOVIES,
-            payload: res.data
-        })
-        console.log("photos", res.data)
-    }catch(error){
-        console.log("error", error)
-    }
-}
 
-export default getMovies;
+export const movieList = () => async dispatch => {
+  try {
+    const getMovieRes = await fetch(
+      `${baseUrl}/movies/searchall?limit=50&page=1`,
+      {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json"
+        }
+      }
+    );
+    const dataMovie = await getMovieRes.json();
+    dispatch({
+      type: "GET_MOVIES",
+      payload: dataMovie.data.docs
+    });
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const getMovieById = id => async dispatch => {
+  try {
+    const res = await fetch(`${baseUrl}/movies/id?id=${id}`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json"
+      }
+    });
+    let data = await res.json();
+    dispatch({
+      type: "GET_ID",
+      payload: data.data
+    });
+  } catch (error) {
+    console.log(error);
+  }
+};
