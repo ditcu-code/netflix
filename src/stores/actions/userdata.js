@@ -4,7 +4,7 @@ const baseUrl = "https://ga-todoapps.herokuapp.com/api/v1";
 let token = localStorage.getItem("token")
 
 export const getProfile = () => async dispatch => {
-    console.log('token:', token)
+    // console.log('token:', token)
     if (token === null) {        
         window.location.reload()
     }
@@ -14,7 +14,7 @@ export const getProfile = () => async dispatch => {
                 auth: token
             }
         })
-        console.log(res.data.profile)
+        // console.log(res.data.profile)
         dispatch({
             type: GET_PROFILE,
             payload: res.data.profile

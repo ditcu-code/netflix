@@ -1,27 +1,39 @@
-import React, { useState, useEffect, useCallback } from "react";
-import { Card, Pagination, Col, Tabs } from 'antd';
+import React, { useState, useEffect} from "react";
+import { Card, Pagination, Col, Tabs, Row } from 'antd';
 import '../assets/css/slider.scss'
-import { movieList } from '../stores/actions/movies';
+import { movieList, getGenres, getMoviesByGenre } from '../stores/actions/movies';
 import { useDispatch, useSelector } from "react-redux";
 import '../assets/css/movieCards.scss'
+import Title from "antd/lib/typography/Title";
+import { TagsOutlined } from "@ant-design/icons";
+import {useParams} from "react-router-dom";
 const { Meta } = Card;
 const { TabPane } = Tabs;
 
 const MovieCards = () => {
-    
+    const genres = useSelector(state => state.movies.genres)
     const movies = useSelector(state => state.movies.movies)
+    const moviebygenre = useSelector(state => state.movies.moviebygenre)
     const dispatch = useDispatch()
+    const [genreId, setgenreId] = useState(28); useParams()
     const [page, setPage] = useState(
         {
         minValue: 0,
         maxValue: 6
         }
     );
+    // let {id} = useParams()
     
     useEffect(() => {
+      if (movies.length <= 0 || genres.length === undefined) {
+        // console.log('semuanya kosong')
         dispatch(movieList())
+        dispatch(getGenres())
+      }
+      if (moviebygenre.length <= 0) {
+        dispatch(getMoviesByGenre(genreId))
+      }
       })
-
 
     const handleChange = item => {
         if (item <= 1) {
@@ -38,12 +50,15 @@ const MovieCards = () => {
       };
 
     const callback = (key) => {
-      console.log(key)
+      setgenreId(key)
+      dispatch(getMoviesByGenre(key))
     }
+
+    console.log('KEYS', genreId, moviebygenre.length)
 
     const movieItem = movies.map(item => 
             <Card
-                key={item._id}
+                key={item.id}
                 hoverable
                 cover={<img alt={item.title} src={item.Images[0].url} />}
             >
@@ -51,31 +66,50 @@ const MovieCards = () => {
             </Card>
     );
 
+    const moviebygenreItem = moviebygenre.map(item => 
+      <Card
+          key={item.id}
+          hoverable
+          cover={<img alt={item.title} src={item.Images[0].url} />}
+      >
+          <Meta title={item.title} description='cek' />
+      </Card>
+    );
+
+
+    // console.log('genres', genres)
+
+    // console.log('movies', movies)
+
+    const genreItem = genres.map(item =>
+      <TabPane tab={item.name} key={item.id} >
+      </TabPane>
+    );
+
     return (
-        <div>
-          <div className='movieGenres'>
-            <Tabs defaultActiveKey="1" onChange={callback} tabBarGutter={50}>
-              <TabPane tab="Action" key="1">
-                Content of Tab Pane 1
-              </TabPane>
-              <TabPane tab="Thriller" key="2">
-                Content of Tab Pane 2
-              </TabPane>
-              <TabPane tab="Sci-fi" key="3">
-                Content of Tab Pane 3
-              </TabPane>
-              <TabPane tab="Drama" key="4">
-                Content of Tab Pane 4
-              </TabPane>
-            </Tabs>
-          </div>
+      <div>
+        <Col className='movieCards-wrapper'>
           <Col span={24} className='movieCards' >
               {movieItem}
+          </Col>
+          <Row className='movieGenres'>
+            <Col span={5}>
+              <Title><TagsOutlined /> Genres</Title>
+            </Col>
+            <Col span={19}>
+              <Tabs defaultActiveKey='1' onChange={callback} tabBarGutter={40}>
+              {genreItem}
+              </Tabs>
+            </Col>
+          </Row>
+          <Col span={24} className='movieCards' >
+            {moviebygenreItem}
           </Col>
           <Col span={24} className='moviePagination' >
               <Pagination defaultCurrent={1} total={24} defaultPageSize={6} onChange={handleChange}/>
           </Col>
-        </div>
+        </Col>
+      </div>
     )
 }
 

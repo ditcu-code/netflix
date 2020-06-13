@@ -1,6 +1,14 @@
-.movieGenres{
-    padding: 1em 6em;
+.movieCards-wrapper{
+    padding: 2em 0;
     background-color: #191919;
+}
+
+.movieGenres{
+    padding: 2em 6em 0 6em;
+    h1.ant-typography, .ant-typography h1{
+        padding: 0.5rem 0rem;
+        color: #ffffff;
+    }
     .ant-tabs{
         color: #858585;
     }
@@ -21,13 +29,13 @@
 
 .movieCards{
     display: inline-block;
-    background-color: #191919;
     width: 100%;
-    padding: 2em 6em;
+    padding: 1em 6em;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    justify-content: space-between;
+    // align-content: flex-start;
+    justify-content: space-around;
     // grid-template-columns: repeat(5, 14.2rem);
     // grid-auto-rows: auto;
     // grid-gap: 12rem 1rem;
@@ -46,7 +54,7 @@
     .ant-card {
         transition: .8s ;
         width: 200px;
-        height: 360px;
+        height: 400px;
         background-color: #191919;
         border: none;
         font-size: 10px;
@@ -66,5 +74,5 @@
 .moviePagination{
     background-color: #191919;
     text-align: center;
-    padding: 1em 0 3em 0;
+    padding: 1em 0 1em 0;
 }

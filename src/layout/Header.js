@@ -22,18 +22,16 @@ const Header = () => {
             password: '',
         }
     )
-    
+
     useEffect (() => {
-        dispatch(getProfile())
-        toogleLogin()
+        if (userdata === null) {
+            cekUserdata()
+        }
     })
     
-    const toogleLogin = () => {
-        if(isAuthenticate === false ){
-            console.log("token tidak ada", isAuthenticate)
-        } 
-        else{
-            console.log("token ada", isAuthenticate)
+    const cekUserdata = () => {
+        if(isAuthenticate === true ){
+            // console.log("token ada", isAuthenticate)
             dispatch(getProfile())
         }
     }
@@ -47,7 +45,7 @@ const Header = () => {
     
     const handleLogin = props => {
         dispatch(login(input))
-        dispatch(getProfile())
+        // dispatch(getProfile())
         setModalLogin(false)
         // props.history.push('/')
     }
