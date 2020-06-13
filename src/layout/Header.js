@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect,} from 'react';
 import {Input, Row, Col, Modal, Menu, Form, Dropdown, Checkbox, Avatar} from "antd";
 import {UserOutlined, MailOutlined, LockOutlined, SearchOutlined} from "@ant-design/icons"
 import "../assets/css/header.scss"
@@ -21,23 +21,26 @@ const Header = () => {
             password: '',
         }
     )
-    const username = useSelector(state => state.userdata.name)
+    const userdata = useSelector(state => state.userdata.profile)
 
-    // useEffect(() =>{
-    // }, [getProfile])
-    
-    useEffect (() => {
-        // dispatch(getProfile())
-        toogleLogin()
-    })
+    useEffect(() =>{
+        dispatch(getProfile())
+    }, [getProfile])
+
+    // useEffect (() => {
+    //     toogleLogin()
+        
+    // },[])
+
+    console.log("userdata", userdata)
     
  
     const toogleLogin = () => {
         if(isAuthenticate === false ){
-            console.log("token tidak ada", isAuthenticate, username)
+            console.log("token tidak ada", isAuthenticate)
         } 
         else{
-            console.log("token ada", isAuthenticate, username)
+            console.log("token ada", isAuthenticate)
             dispatch(getProfile())
         }
     }
@@ -51,6 +54,7 @@ const Header = () => {
     
     const handleLogin = props => {
         dispatch(login(input))
+        dispatch(getProfile())
         setModalLogin(false)
         // props.history.push('/')
     }
@@ -83,7 +87,10 @@ const Header = () => {
         
     const ProfileMenu = (
         <Menu>
-            <Menu.Item key="1">Profile</Menu.Item>
+            <Menu.Item key="1">
+                <a rel="noopener noreferrer" href="/profile">
+                    Profile</a>
+            </Menu.Item>
             <Menu.Item key="2">Settings</Menu.Item>
             <Menu.Item key="3">Help</Menu.Item>
             <Menu.Item key="4" onClick={handleSignOut} >Sign out</Menu.Item>
@@ -196,8 +203,8 @@ const Header = () => {
                                     className="ant-dropdown-link header_margin" 
                                     style={{color:"#858585", cursor:"pointer", display:"flex"}}
                                     onClick={e => e.preventDefault()}>
-                                    <Avatar icon={<UserOutlined />} className="avatar" />
-                                    <p className="username">Hi, {username}</p>
+                                    <Avatar src={userdata? userdata.image : <UserOutlined/>} className="avatar" />
+                                    <p className="username">Hi, {userdata? userdata.name : ""}</p>
                                 </div>
                             </Dropdown>
                         )

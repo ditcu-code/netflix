@@ -3,7 +3,8 @@ import {Switch,Route} from "react-router-dom";
 import HomePage from "../pages/HomePage";
 import PageOverview from "../pages/PageOverview";
 import PageReview from "../pages/PageReview";
-import PageActors from "../pages/PageActors"
+import PageActors from "../pages/PageActors";
+import ProfilePage from "../pages/ProfilePage"
 
 
 const Routes = () => {
@@ -14,6 +15,7 @@ const Routes = () => {
         <Route path="/overview" component={PageOverview} exact />
         <Route path="/reviews" component={PageReview} exact />
         <Route path="/actors" component={PageActors} exact />
+        <Route path="/profile" component={ProfilePage} exact />
       </Switch>
     </Fragment>
   )
