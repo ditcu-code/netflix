@@ -33,10 +33,18 @@ export const getMovieById = id => async dispatch => {
       }
     });
     let data = await res.json();
-    // console.log('getMovieId', data.data)
+    // console.log('getMovieId', data.data.detail)
+    // console.log ('videos', data.data.detail.Videos)
+    // const url = data.data.detail.Videos[0].url
+    // console.log("url", url)
+    // const urlres = url.substr(32)
+    // console.log("urlres", urlres)
+    // console.log ('banner', data.data.detail.Images[1].url)
     dispatch({
       type: "GET_ID",
-      payload: data.data
+      payload: data.data.detail,
+      bannerImage: data.data.detail.Images[3],
+      trailer: data.data.detail.Videos[0].url.substr(32)
     });
     const cast = await fetch(`${baseUrl}/movie/${id}/actor`, {
       method: "GET",

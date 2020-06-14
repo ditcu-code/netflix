@@ -4,11 +4,13 @@ const initialState = {
     actors: [],
     genres: [],
     moviebygenre: [],
-    error: null
+    error: null,
+    Images: [],
+    Videos: ""
 };
   
   const movies = (state = initialState, action) => {
-    const { type, payload } = action;
+    const { type, payload, bannerImage, trailer } = action;
     switch (type) {
       case "GET_MOVIES":
         return {
@@ -19,6 +21,8 @@ const initialState = {
         return {
           ...state,
           movieId: payload,
+          Images: bannerImage,
+          Videos: trailer
         };  
       case "GET_GENRES":
         return {

@@ -2,7 +2,7 @@
 
 .banner-wrapper{
     background-color: #858585;
-    background-image: url("../images/jojo_rabbit.jpg");
+    // background-image: url("../images/jojo_rabbit.jpg");
     height: 44rem;
     background-position: center;
     background-repeat: no-repeat;
@@ -79,4 +79,18 @@
 
 .btn-trailer:active, .btn-watchlist:active{
     transform: translateY(5px);
+}
+
+//for modal
+
+.trailer-modal{
+    width: 80%;
+    height: 50%;
+    margin-left: 200px;
+    background-color: #858585;
+    z-index: 1;
+}
+
+.modal-header{
+    text-align: right;
 }
