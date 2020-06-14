@@ -20,9 +20,9 @@ const ProfilePage = () => {
 
     console.log("updateProfile", updateProfile)
 
-    useEffect(() =>{
-        dispatch(getProfile())
-    }, [getProfile])
+    // useEffect(() =>{
+    //     dispatch(getProfile())
+    // }, [getProfile])
 
     // const updateProfile = (
     //     <Modal

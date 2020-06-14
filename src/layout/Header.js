@@ -24,7 +24,7 @@ const Header = () => {
     )
     
     useEffect (() => {
-        dispatch(getProfile())
+        // dispatch(getProfile())
         toogleLogin()
     })
     
@@ -47,7 +47,7 @@ const Header = () => {
     
     const handleLogin = props => {
         dispatch(login(input))
-        dispatch(getProfile())
+        // dispatch(getProfile())
         setModalLogin(false)
         // props.history.push('/')
     }
