@@ -1,70 +1,32 @@
-.movieGenres{
-    padding: 1em 6em;
+@import 'mixin';
+
+.movieCards-wrapper{
+    padding: 2em 0;
     background-color: #191919;
-    .ant-tabs{
-        color: #858585;
-    }
-    .ant-tabs-tab{
-        font-size: 1.1em;
-        transition: 0.2s;
-    }
-    .ant-tabs-tab-active{
-        color: #E50914;        
-    }
-    .ant-tabs-ink-bar{
-        background: #E50914;        
-    }
-    .ant-tabs-tab:hover{
+}
+
+.movieGenres{
+    padding: 2em 6em 0 6em;
+    h1.ant-typography, .ant-typography h1{
+        padding: 0.5rem 0rem;
         color: #ffffff;
     }
+    @include tabs
 }
 
 .movieCards{
     display: inline-block;
-    background-color: #191919;
     width: 100%;
-    padding: 2em 6em;
+    padding: 1em 6em;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    justify-content: space-between;
-    // grid-template-columns: repeat(5, 14.2rem);
-    // grid-auto-rows: auto;
-    // grid-gap: 12rem 1rem;
-    .ant-card-meta-title {
-        font-size: 1.4em;
-        margin-bottom: 3px !important;
-        color: #ffffff;
-    }
-    .ant-card-meta-description {
-        font-size: 1.1em;
-        color: #ffffff;
-    }
-    .ant-card-hoverable:hover {
-        transform: scale(1.15);
-    }
-    .ant-card {
-        transition: .8s ;
-        width: 200px;
-        height: 360px;
-        background-color: #191919;
-        border: none;
-        font-size: 10px;
-        border-radius: 10px;
-        box-shadow: none;
-    }
-    .ant-card-body{
-        padding: 1.5em 2px;
-    }
-    .ant-card-cover {
-        img{
-            border-radius: 10px;
-        }
-    }
+    justify-content: space-around;
+    @include cards
 }
 
 .moviePagination{
     background-color: #191919;
     text-align: center;
-    padding: 1em 0 3em 0;
+    padding: 1em 0 1em 0;
 }

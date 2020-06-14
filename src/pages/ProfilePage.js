@@ -1,7 +1,5 @@
 import React, {useState, useEffect} from "react";
 import { useDispatch, useSelector } from "react-redux";
-import Header from "../layout/Header";
-import Footer from "../layout/Footer";
 import "../assets/css/profile.scss";
 import "../../node_modules/antd/dist/antd.css";
 import { Layout, Menu, Row, Col, Avatar, Card, Rate, Modal, Upload, Button /*Breadcrumb*/ } from 'antd';
@@ -50,7 +48,6 @@ const ProfilePage = () => {
                     </Upload>
                 </div>
             </Modal>
-            <Header/>
             <Layout>
                 <Content style={{ padding: '0 50px', background:"#191919" }}>
                 {/* <Breadcrumb style={{ margin: '16px 0' }}>
@@ -157,7 +154,6 @@ const ProfilePage = () => {
                 </Layout>
                 </Content>
             </Layout>
-            <Footer/>
             {/* {updateProfile} */}
         </div>
     )

@@ -10,16 +10,13 @@ import {
     Tooltip
 } from "antd";
 import "../../node_modules/antd/dist/antd.css"
-import Header from "../layout/Header";
-import Footer from "../layout/Footer";
-import MovieBanner from "../components/MovieBanner";
-import { DislikeOutlined, LikeOutlined, DislikeFilled, LikeFilled } from '@ant-design/icons';
+import MovieBanner from "./MovieBanner";
+// import { DislikeOutlined, LikeOutlined, DislikeFilled, LikeFilled } from '@ant-design/icons';
 
 const PageReview = () => {
     
     return(
         <div>
-            <Header/>
             <MovieBanner/>
             <Row>
                 <Col span={1}></Col>
@@ -77,7 +74,6 @@ const PageReview = () => {
                     }
                 />
             </div>
-            <Footer/>
         </div>
     )
 }

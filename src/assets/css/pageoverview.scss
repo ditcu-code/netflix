@@ -1,3 +1,5 @@
+@import 'mixin';
+
 .banner-wrapper{
     background-color: #858585;
     background-image: url("../images/jojo_rabbit.jpg");
@@ -6,36 +8,39 @@
     background-repeat: no-repeat;
     background-size: cover;
     box-shadow:inset 0 0 0 2000px rgba(0, 0, 0, 0.5);
+    .banner-text{
+        color: white;
+    }
+    
+    h3{
+        font-size: 2rem;
+        text-transform: uppercase;
+    }
+    
+    .banner-title{
+        padding-top: 8rem;
+    }
 }
 
-.banner-text{
-    color: white;
-}
-
-h3{
-    font-size: 2rem;
-    text-transform: uppercase;
-}
-
-.banner-title{
-    padding-top: 8rem;
-}
 
 .content-wrapper{
     background-color: #191919;
     color: white;
     padding-bottom: 1rem;
     padding-top: 1rem;
-}
-
-.content-divider{
-    padding-left: 4rem;
-    padding-right: 4rem;
-}
-
-.content-text{
-    padding-left: 5rem;
-    padding-right: 5rem;
+    .overview-tabs{
+        padding: 0 6em;
+        @include tabs
+    }
+    .content-divider{
+        padding-left: 4rem;
+        padding-right: 4rem;
+    }
+    
+    .content-text{
+        padding-left: 5rem;
+        padding-right: 5rem;
+    }
 }
 
 .banner-btn{
