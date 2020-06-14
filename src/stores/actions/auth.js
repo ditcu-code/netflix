@@ -1,6 +1,6 @@
 import { LOGIN_SUCCESS, LOGIN_FAILED, SIGN_OUT, /*GET_PROFILE*/} from "./types";
 import axios from "axios";
-const baseUrl = "https://ga-todoapps.herokuapp.com/api/v1";
+const baseUrl = "https://ga-moviereview.herokuapp.com/api/v1";
 
 export const login = data => async dispatch => {
   
@@ -44,6 +44,7 @@ export const signOut = () => {
 };
 
 export const register = data => async dispatch => {
+  console.log('reg called')
   try{
     const res = await axios.post(`${baseUrl}/user/register`, data)
     localStorage.setItem("token", res.data.token)

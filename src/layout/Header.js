@@ -51,7 +51,7 @@ const Header = () => {
         // props.history.push('/')
     }
 
-    const handleRegister = () => {
+    const handleRegister = (props) => {
         dispatch(register(input))
         setModalRegister(false)
         // props.history.push('/')
