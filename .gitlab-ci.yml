@@ -1,0 +1,43 @@
+image: node:8.15.1
+
+stages:
+  - build
+  - staging
+  - production
+
+deploy-to-development:
+  type: build
+  script:
+    - npm install
+    - npm run build
+  except:
+    - develop
+    - master
+
+deploy-to-staging:
+  type: deploy
+  stage: staging
+  environment:
+    name: staging
+    url: https://staging-netflix.herokuapp.com/
+  script:
+    - apt-get update -qy
+    - apt-get install -y ruby ruby-dev rubygems-integration
+    - gem install dpl
+    - dpl --provider=heroku --app=$NETFLIX_STAGING_APP --api-key=80e04161-5631-43d0-9b6b-4ee0ef01f6c7
+  only:
+    - develop
+    
+deploy-production:
+  type: deploy
+  stage: production
+  environment:
+    name: production
+    url: https://netflix-movie-reviews.herokuapp.com/
+  script:
+    - apt-get update -qy
+    - apt-get install -y ruby ruby-dev rubygems-integration
+    - gem install dpl
+    - dpl --provider=heroku --app=$NETFLIX_PRODUCTION_APP --api-key=80e04161-5631-43d0-9b6b-4ee0ef01f6c7
+  only:
+    - master

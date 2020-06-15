@@ -1,23 +1,19 @@
 import {GET_PROFILE} from "./types";
 import axios from "axios";
-const baseUrl = "https://ga-todoapps.herokuapp.com/api/v1";
-let token = localStorage.getItem("token")
+const baseUrl = "https://ga-moviereview.herokuapp.com/api/v1";
 
 export const getProfile = () => async dispatch => {
-    // console.log('token:', token)
-    if (token === null) {        
-        window.location.reload()
-    }
+    let token = localStorage.getItem("token")
     try{
-        const res = await axios.get(`${baseUrl}/user/profile`, {
+        const res = await axios.get(`${baseUrl}/user`, {
             headers: {
                 auth: token
             }
         })
-        // console.log(res.data.profile)
+        console.log('getprofile', res.data.data)
         dispatch({
             type: GET_PROFILE,
-            payload: res.data.profile
+            payload: res.data.data
         })
     }catch(error){
         console.log(error, error.response)
