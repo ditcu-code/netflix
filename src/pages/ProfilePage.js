@@ -1,11 +1,11 @@
-import React, {useState, useEffect} from "react";
-import { useDispatch, useSelector } from "react-redux";
+import React, {useState} from "react";
+import { useSelector } from "react-redux";
 import "../assets/css/profile.scss";
 import "../../node_modules/antd/dist/antd.css";
-import { Layout, Menu, Row, Col, Avatar, Card, Rate, Modal, Upload, Button, Input /*Breadcrumb*/ } from 'antd';
+import { Layout, Menu, Row, Col, Avatar, /*Card, Rate,*/ Modal, Upload, Button, Input /*Breadcrumb*/ } from 'antd';
 import { UserOutlined, LaptopOutlined, NotificationOutlined, UploadOutlined } from '@ant-design/icons';
-import UpdateProfile from '../components/UpdateProfile'
-import {getProfile} from "../stores/actions/userdata"
+// import UpdateProfile from '../components/UpdateProfile'
+// import {getProfile} from "../stores/actions/userdata"
 
 const ProfilePage = () => {
     const { SubMenu } = Menu;

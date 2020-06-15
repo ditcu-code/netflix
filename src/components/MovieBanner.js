@@ -21,7 +21,7 @@ const MovieBanner = () => {
     const trailer = useSelector (state => state.movies.Videos)
     const [IdChange, setIdChange] = useState(false)
     let{id} = useParams()
-    const [value, setValue] = useState(0)
+    // const [value, setValue] = useState(0)
     const rating = useSelector(state => state.review.average)
     const reviews = useSelector (state => state.review.count)
     // console.log("ratingres", rating)
@@ -31,7 +31,7 @@ const MovieBanner = () => {
             dispatch(reviewList(id)) //id nya bonceng dispatch 
             setIdChange(!!setIdChange)
         }
-        })
+        }, [IdChange, dispatch, id])
     // dispatch(reviewList(id))
 
     return(
@@ -44,7 +44,7 @@ const MovieBanner = () => {
                 footer={null}
                 centered={true}
                 >
-                <iframe width="700" height="400" src={`https://www.youtube.com/embed/${trailer}`} frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen />
+                <iframe title='movie-trailer' width="700" height="400" src={`https://www.youtube.com/embed/${trailer}`} frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen />
             </Modal>
             <Row className="banner-title">
                 <Col span={1}></Col>
