@@ -1,22 +1,36 @@
-import React, {useState, useEffect} from "react";
-import { useDispatch, useSelector } from "react-redux";
+import React, {useState} from "react";
+import { useSelector } from "react-redux";
 import "../assets/css/profile.scss";
 import "../../node_modules/antd/dist/antd.css";
-import { Layout, Menu, Row, Col, Avatar, Card, Rate, Modal, Upload, Button /*Breadcrumb*/ } from 'antd';
+import { Layout, Menu, Row, Col, Avatar, /*Card, Rate,*/ Modal, Upload, Button, Input /*Breadcrumb*/ } from 'antd';
 import { UserOutlined, LaptopOutlined, NotificationOutlined, UploadOutlined } from '@ant-design/icons';
-import {getProfile} from "../stores/actions/userdata"
+// import UpdateProfile from '../components/UpdateProfile'
+// import {getProfile} from "../stores/actions/userdata"
 
 const ProfilePage = () => {
     const { SubMenu } = Menu;
     const { Content, Sider } = Layout;
-    const {Meta} = Card;
+    // const {Meta} = Card;
     const [showModalProfile, setShowModalProfile] = useState(false)
-    const [confirmLoading, setConfirmLoading] = useState(false)
-    const dispatch = useDispatch()
+    // const [confirmLoading, setConfirmLoading] = useState(false)
+    // const dispatch = useDispatch()
     const userdata = useSelector(state => state.userdata.profile)
     const updateProfile = useSelector(state => state.updateProfile.name)
+    const [data, setdata] = useState(
+        {
+            name: '',
+            image: '',
+        }
+    )
 
-    console.log("updateProfile", updateProfile)
+    const handleInput = e => {
+        setdata({
+            ...data,
+            [e.target.name]: e.target.value
+        })
+    }
+
+    console.log("updateProfile", updateProfile, 'data', data)
 
     // useEffect(() =>{
     //     dispatch(getProfile())
@@ -39,14 +53,17 @@ const ProfilePage = () => {
                 visible={showModalProfile}
                 onCancel={() => setShowModalProfile(false)}
             >
-                <div>
+                {/* <UpdateProfile/> */}
+                <Row style={{marginBottom:'20px'}}>
+                    <p>Username</p>
+                    <Input name='name' placeholder="Input new username" onChange={handleInput} />
+                </Row>
                     <p>Update profile photo</p>
-                    <Upload>
+                    <Upload {...data} name='image' >
                         <Button>
                             <UploadOutlined /> Upload
                         </Button>
                     </Upload>
-                </div>
             </Modal>
             <Layout>
                 <Content style={{ padding: '0 50px', background:"#191919" }}>
@@ -58,8 +75,8 @@ const ProfilePage = () => {
                 <Layout className="site-layout-background main-section-wrapper" style={{ padding: '24px 0', background:"#262626", color:"#858585" }}>
                     <Sider className="site-layout-background" width={200} style={{height: "fit-content", background:"#262626"}}>
                         <Col style={{textAlign:"center"}}>
-                             <Avatar size={64} src={userdata? userdata.image : <UserOutlined/>} onClick={() => setShowModalProfile(true)} className="profile-photo" />
-                             <p>{userdata? userdata.name : ""}</p>
+                             <Avatar size={80} src={userdata? userdata.image : <UserOutlined/>} onClick={() => setShowModalProfile(true)} className="profile-photo" />
+                             <p style={{paddingTop: '10px', fontSize:'22px'}}>{userdata? userdata.name : ""}</p>
                         </Col>
                         <Menu
                             mode="inline"
@@ -86,64 +103,6 @@ const ProfilePage = () => {
                     </Sider>
                     <Content style={{ padding: '0 24px', minHeight: 280, width:"50%", background:"#262626", color:"#858585" }}>
                         <h2 style={{color:"#858585"}}>My Watchlist</h2>
-                        <Row style={{paddingBottom:"6rem"}}>
-                            <Col span={8}>
-                                <Card
-                                    hoverable
-                                    style={{ width: 240, height:"150px" }}
-                                    cover={<img alt="example" src="https://os.alipayobjects.com/rmsportal/QBnOOoLaAfKPirc.png" style={{height:"150px"}} />}
-                                >
-                                    <Meta title="Europe Street beat" description={<Rate allowHalf defaultValue={3.5}/>} style={{textAlign:"left"}}/>
-                                </Card>
-                            </Col>
-                            <Col span={8}>
-                                <Card
-                                    hoverable
-                                    style={{ width: 240, height:"150px" }}
-                                    cover={<img alt="example" src="https://os.alipayobjects.com/rmsportal/QBnOOoLaAfKPirc.png" style={{height:"150px"}} />}
-                                >
-                                    <Meta title="Europe Street beat" description={<Rate allowHalf defaultValue={3.5}/>} style={{textAlign:"left"}}/>
-                                </Card>
-                            </Col>
-                            <Col span={8}>
-                                <Card
-                                    hoverable
-                                    style={{ width: 240, height:"150px" }}
-                                    cover={<img alt="example" src="https://os.alipayobjects.com/rmsportal/QBnOOoLaAfKPirc.png" style={{height:"150px"}} />}
-                                >
-                                    <Meta title="Europe Street beat" description={<Rate allowHalf defaultValue={3.5}/>} style={{textAlign:"left"}}/>
-                                </Card>
-                            </Col>
-                        </Row>
-                        <Row>
-                            <Col span={8}>
-                                <Card
-                                    hoverable
-                                    style={{ width: 240, height:"150px" }}
-                                    cover={<img alt="example" src="https://os.alipayobjects.com/rmsportal/QBnOOoLaAfKPirc.png" style={{height:"150px"}} />}
-                                >
-                                    <Meta title="Europe Street beat" description={<Rate allowHalf defaultValue={3.5}/>} style={{textAlign:"left"}}/>
-                                </Card>
-                            </Col>
-                            <Col span={8}>
-                                <Card
-                                    hoverable
-                                    style={{ width: 240, height:"150px" }}
-                                    cover={<img alt="example" src="https://os.alipayobjects.com/rmsportal/QBnOOoLaAfKPirc.png" style={{height:"150px"}} />}
-                                >
-                                    <Meta title="Europe Street beat" description={<Rate allowHalf defaultValue={3.5}/>} style={{textAlign:"left"}}/>
-                                </Card>
-                            </Col>
-                            <Col span={8}>
-                                <Card
-                                    hoverable
-                                    style={{ width: 240, height:"150px" }}
-                                    cover={<img alt="example" src="https://os.alipayobjects.com/rmsportal/QBnOOoLaAfKPirc.png" style={{height:"150px"}} />}
-                                >
-                                    <Meta title="Europe Street beat" description={<Rate allowHalf defaultValue={3.5}/>} style={{textAlign:"left"}}/>
-                                </Card>
-                            </Col>
-                        </Row>
                         <Row>
                             <Col span={8}></Col>
                             <Col span={8}></Col>

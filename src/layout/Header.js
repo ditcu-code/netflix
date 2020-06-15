@@ -6,11 +6,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { login, signOut, register } from "../stores/actions/auth";
 import {getProfile} from "../stores/actions/userdata"
 import {Link} from "react-router-dom";
-// import {useHistory} from "react-router-dom";
 
 const Header = () => {
-    // const user = localStorage.getItem('token');
-    // const history = useHistory()
     const dispatch = useDispatch()
     const [movie, setMovie] = useState("");
     const [modalLogin, setModalLogin] = useState(false)
@@ -30,10 +27,9 @@ const Header = () => {
         }
     })
     
-    const cekUserdata = () => {
+    const cekUserdata = (token) => {
         if(isAuthenticate === true ){
-            // console.log("token ada", isAuthenticate)
-            dispatch(getProfile())
+            dispatch(getProfile(token))
         }
     }
 
@@ -46,15 +42,12 @@ const Header = () => {
     
     const handleLogin = props => {
         dispatch(login(input))
-        // dispatch(getProfile())
         setModalLogin(false)
-        // props.history.push('/')
     }
 
-    const handleRegister = () => {
+    const handleRegister = (props) => {
         dispatch(register(input))
         setModalRegister(false)
-        // props.history.push('/')
     }
     
     const handleSignOut = () => {
@@ -175,18 +168,18 @@ const Header = () => {
                     />
                     </Link>
                 </Col>
-                <Col span={16}>
+                <Col span={14}>
                     <Search
                         placeholder="search movie..."
                         enterButton={suffix}
-                        // size="large"
                         value={movie}
                         onChange={(e)=> setMovie(e.target.value)}
                         style={{width:"70%"}}
                         className="header_margin"
                     />
                 </Col>
-                <Col span={4}>
+                <Col span={6}>
+                    <Col  className='profileNav'>
                     {isAuthenticate ? 
                         (
                             <Dropdown overlay={ProfileMenu} >
@@ -194,8 +187,8 @@ const Header = () => {
                                     className="ant-dropdown-link header_margin" 
                                     style={{color:"#858585", cursor:"pointer", display:"flex"}}
                                     onClick={e => e.preventDefault()}>
-                                    <Avatar src={userdata? userdata.image : <UserOutlined/>} className="avatar" />
                                     <p className="username">Hi, {userdata? userdata.name : ""}</p>
+                                    <Avatar src={userdata? userdata.image : <UserOutlined/>} className="avatar" />
                                 </div>
                             </Dropdown>
                         )
@@ -205,6 +198,7 @@ const Header = () => {
                                 onClick={()=> setModalLogin(true) }>Sign in</p>
                         )
                     }
+                    </Col>
                 </Col>
             </Row>
             {LoginModal}
