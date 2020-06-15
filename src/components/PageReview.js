@@ -1,12 +1,17 @@
-import React from "react";
+import React, {useState} from "react";
 import "../assets/css/pageoverview.scss";
 import {Link} from "react-router-dom";
+import {reviewList} from "../stores/actions/review";
+import {useSelector} from "react-redux";
 import {
     Row, 
     Col, 
     Divider, 
     Comment,
     Avatar,
+    Form,
+    Input,
+    Button,
     Tooltip
 } from "antd";
 import "../../node_modules/antd/dist/antd.css"
@@ -15,64 +20,57 @@ import MovieBanner from "./MovieBanner";
 
 const PageReview = () => {
     
+    const [review, setReview] = useState("")
+    const reviews= useSelector(state => state.review.comments)
+    console.log("komen", reviews)
+
+
     return(
         <div>
-            <MovieBanner/>
-            <Row>
-                <Col span={1}></Col>
-                <Col span={4}><Link to="/overview">Overview</Link></Col>
-                <Col span={4}><Link to="/actors">Actors</Link></Col>
-                <Col span={4}><Link to="/reviews">Reviews</Link></Col>
-            </Row>
+            <Form>
+                <Form.Item
+                    name="review"
+                    rules={[{ required: true, message: 'Please input your review!' }]}
+                >
+                    <Input placeholder="Add your review..." allowClear value={review} onChange={e => setReview(e.target.value)} />
+                </Form.Item>
+                <Form.Item>
+                    <Button type="primary" htmlType="submit">Submit</Button>
+                </Form.Item>
+            </Form>
             <div>
-                <Comment
-                    author={<a>Han Solo</a>}
-                    avatar={
-                        <Avatar
-                        src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"
-                        alt="Han Solo"
+                {reviews.length ?
+                    reviews.map(item => 
+                        <Comment
+                            author={<a>Anonymous User</a>}
+                            avatar={
+                                <Avatar
+                                src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"
+                                alt="Han Solo"
+                                />
+                            }
+                            content={
+                                <p>{item.comment}</p>  
+                            }
                         />
-                    }
-                    content={
-                        <p>
-                        We supply a series of design principles, practical patterns and high quality design
-                        resources (Sketch and Axure), to help people create their product prototypes beautifully
-                        and efficiently.
-                        </p>
-                    }
-                />
-                <Comment
-                    author={<a>Ben Solo</a>}
-                    avatar={
-                        <Avatar
-                        src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"
-                        alt="Han Solo"
-                        />
-                    }
-                    content={
-                        <p>
-                        We supply a series of design principles, practical patterns and high quality design
-                        resources (Sketch and Axure), to help people create their product prototypes beautifully
-                        and efficiently.
-                        </p>
-                    }
-                />
-                <Comment
-                    author={<a>Leia Solo</a>}
-                    avatar={
-                        <Avatar
-                        src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"
-                        alt="Han Solo"
-                        />
-                    }
-                    content={
-                        <p>
-                        We supply a series of design principles, practical patterns and high quality design
-                        resources (Sketch and Axure), to help people create their product prototypes beautifully
-                        and efficiently.
-                        </p>
-                    }
-                />
+                    )
+                    :
+                    <p>No reviews yet.</p>
+                } 
+                {/* {reviews.map(item => 
+                    <Comment
+                        author={<a>Han Solo</a>}
+                        avatar={
+                            <Avatar
+                            src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"
+                            alt="Han Solo"
+                            />
+                        }
+                        content={
+                            <p>{item.comment}</p>  
+                        }
+                    /> 
+                )} */}
             </div>
         </div>
     )
