@@ -34,7 +34,7 @@ const PageOverview = () => {
             dispatch(getMovieById(id)) //id nya bonceng dispatch 
             setIdChange(!!setIdChange)
         }
-        })
+        }, [IdChange, dispatch, id])
 
     // console.log(id, IdChange)
 

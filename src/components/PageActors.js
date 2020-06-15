@@ -1,7 +1,6 @@
-import React, {useEffect} from "react";
+import React from "react";
 import "../assets/css/pageActors.scss";
 import {
-    Col, 
     Card
 } from "antd";
 import { useSelector } from "react-redux";

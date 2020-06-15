@@ -1,19 +1,14 @@
 .header_wrapper{
     background: black;
     width: 100%;
+    .profileNav{
+        float: right;
+    }
     .header_margin{
         margin-top: 1.5rem;
         margin-bottom: 1.5rem;
         color: #191919;
     }
-    
-    /* .sign-in{
-        color:#858585;
-    
-    }
-    .sign-in:hover{
-        cursor: pointer;
-    } */
     
     .search-bar{
         width: 40%;
@@ -41,11 +36,12 @@
     }
 
     .avatar{
-        margin-left: 1rem;
+        float: right;
+        margin-right: 4em;
     }
 
     .username{
-        margin-left: 1rem;
+        margin-right: 1rem;
         position: relative;
         top: .3rem;
     }
