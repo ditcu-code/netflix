@@ -10,7 +10,7 @@ export const login = data => async dispatch => {
     dispatch({
       type: LOGIN_SUCCESS,
     })
-    // console.log("login called", res)
+    console.log("login called", res)
   }catch(error) {
     console.log(error.status)
     dispatch({
@@ -29,10 +29,11 @@ export const register = data => async dispatch => {
   console.log('reg called')
   try{
     const res = await axios.post(`${baseUrl}/user/register`, data)
-    localStorage.setItem("token", res.data.token)
+    localStorage.setItem("token", res.data.data.token)
     dispatch({
       type: LOGIN_SUCCESS
     })
+    console.log("regis", res)
   }catch(error) {
     console.log(error.status)
     dispatch({

@@ -56,11 +56,14 @@ const MovieBanner = () => {
             <Row>
                 <Col span={1}></Col>
                 <Col span={3}>
-                    <Rate allowHalf value={rating} /*blm ada fungsi submit rating*/ />
+                    <Rate allowHalf value={rating / 2} /*blm ada fungsi submit rating*/ />
                 </Col>
                 <Col span={3}>
-                    {/*msh harus dibikin condition kalo jumlah review 0*/}
-                     <p className="banner-text">{reviews} review(s)</p>
+                    {reviews>0 ?
+                        <p className="banner-text">{reviews} review(s)</p>
+                        :
+                        <p className="banner-text">no reviews yet</p>
+                    }
                 </Col>
                 <Col flex="auto"></Col>
             </Row>

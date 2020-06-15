@@ -1,8 +1,9 @@
-import React, {useState} from "react";
+import React, {useState, useEffect} from "react";
 import "../assets/css/pageoverview.scss";
-import {Link} from "react-router-dom";
+import {useParams} from "react-router-dom";
 import {reviewList} from "../stores/actions/review";
-import {useSelector} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
+import {postReview} from "../stores/actions/review";
 import {
     Row, 
     Col, 
@@ -19,23 +20,43 @@ import MovieBanner from "./MovieBanner";
 // import { DislikeOutlined, LikeOutlined, DislikeFilled, LikeFilled } from '@ant-design/icons';
 
 const PageReview = () => {
-    
-    const [review, setReview] = useState("")
+    let {id} = useParams()
+    const dispatch = useDispatch()
+    const [review, setReview] = useState({
+        comment: "",
+        rating: 1
+    })
+    const data = review
     const reviews= useSelector(state => state.review.comments)
-    console.log("komen", reviews)
+    // console.log("komen", reviews)
 
+    console.log(id, data)
+    useEffect(() => {
+        dispatch(reviewList(id))
+    }, [])
+    
+    const handleInput = e => {
+        setReview({
+            ...review,
+            [e.target.name]: e.target.value
+        })
+    }
+
+    const handleSubmit = () => {
+        dispatch(postReview(id, data))
+    }
 
     return(
         <div>
             <Form>
                 <Form.Item
-                    name="review"
+                    name="comment"
                     rules={[{ required: true, message: 'Please input your review!' }]}
                 >
-                    <Input placeholder="Add your review..." allowClear value={review} onChange={e => setReview(e.target.value)} />
+                    <Input placeholder="Add your review..." allowClear value={review.comment}  name="comment" onChange={handleInput} />
                 </Form.Item>
                 <Form.Item>
-                    <Button type="primary" htmlType="submit">Submit</Button>
+                    <Button type="primary" htmlType="submit" onClick={handleSubmit}>Submit</Button>
                 </Form.Item>
             </Form>
             <div>
