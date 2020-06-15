@@ -1,0 +1,32 @@
+@import 'mixin';
+
+.movieCards-wrapper{
+    padding: 2em 0;
+    background-color: #191919;
+}
+
+.movieGenres{
+    padding: 2em 6em 0 6em;
+    h1.ant-typography, .ant-typography h1{
+        padding: 0.5rem 0rem;
+        color: #ffffff;
+    }
+    @include tabs
+}
+
+.movieCards{
+    display: inline-block;
+    width: 100%;
+    padding: 1em 6em;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    @include cards
+}
+
+.moviePagination{
+    background-color: #191919;
+    text-align: center;
+    padding: 1em 0 1em 0;
+}

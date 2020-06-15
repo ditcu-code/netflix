@@ -1,0 +1,50 @@
+@mixin tabs {
+    .ant-tabs{
+        color: #858585;
+    }
+    .ant-tabs-tab{
+        font-size: 1.1em;
+        transition: 0.2s;
+    }
+    .ant-tabs-tab-active{
+        color: #E50914;        
+    }
+    .ant-tabs-ink-bar{
+        background: #E50914;        
+    }
+    .ant-tabs-tab:hover{
+        color: #ffffff;
+}}
+
+@mixin cards {
+    .ant-card-meta-title {
+        font-size: 1.4em;
+        margin-bottom: 3px !important;
+        color: #ffffff;
+    }
+    .ant-card-meta-description {
+        font-size: 1.1em;
+        color: #ffffff;
+    }
+    .ant-card-hoverable:hover {
+        transform: scale(1.15);
+    }
+    .ant-card {
+        transition: .8s ;
+        width: 200px;
+        height: 400px;
+        background-color: #191919;
+        border: none;
+        font-size: 10px;
+        border-radius: 10px;
+        box-shadow: none;
+    }
+    .ant-card-body{
+        padding: 1.5em 2px;
+    }
+    .ant-card-cover {
+        img{
+            border-radius: 10px;
+        }
+    }
+}

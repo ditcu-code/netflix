@@ -1,31 +1,26 @@
 import React from 'react'
-import { Carousel, Row, Col } from 'antd';
-import '../styles/slider.scss'
+import { Carousel } from 'antd';
+import '../assets/css/slider.scss'
 
 const Carou = () => {
     return (
         <div>
-            <Carousel autoplay>
+            <Carousel autoplay effect="fade" speed={2000} autoplaySpeed={5000} >
                 <div>
-                <h3>1</h3>
+                    <img className='carou-img' src={require('../assets/images/oblivion.jpg' )} alt='oblivion' ></img>
                 </div>
                 <div>
-                <h3>2</h3>
+                    <img className='carou-img' src={require('../assets/images/kingdom.jpg' )} alt='kingdom' ></img>
                 </div>
                 <div>
-                <h3>3</h3>
+                    <img className='carou-img' src={require('../assets/images/witcher.jpg' )} alt='witcher' ></img>
                 </div>
                 <div>
-                <h3>4</h3>
+                    <img className='carou-img' src={require('../assets/images/1917.jpg' )} alt='1917' ></img>
                 </div>
             </Carousel>
-            <Row>
-      <Col span={8}>col-8</Col>
-      <Col span={8}>col-8</Col>
-      <Col span={8}>col-8</Col>
-    </Row>
-        </div>
+        </div> 
     )
-}
+} 
 
-export default Carou
+export default Carou 
