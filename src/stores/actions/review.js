@@ -11,7 +11,7 @@ export const reviewList = id => async dispatch => {
                 Accept: "application/json"
             }
         }); 
-        // console.log("review", res.data.data.review)
+        console.log("review", res.data.data)
         dispatch({
             type:"GET_REVIEWS",
             rating: res.data.data.average,
@@ -34,6 +34,25 @@ export const postReview = (id, data) => async dispatch => {
         });
         console.log("post", res)
     }catch (error) {
+        // if(res.status === "fail")
+        alert("you can only give review one time!")
+        console.log(error);
+    }
+}
+
+export const postRating = (id, rating) => async dispatch => {
+    let token = localStorage.getItem("token")
+    console.log("data", rating)
+    try {
+        const res = await axios.post(`${baseUrl}/review/new/${id}`, rating, {
+            headers: {
+                auth: token
+            }
+        });
+        console.log("post", res)
+    }catch (error) {
+        // if(res.status === "fail")
+        alert("you can only give review one time!")
         console.log(error);
     }
 }

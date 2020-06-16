@@ -13,6 +13,7 @@ import {
     Form,
     Input,
     Button,
+    Rate,
     Tooltip
 } from "antd";
 import "../../node_modules/antd/dist/antd.css"
@@ -20,15 +21,25 @@ import MovieBanner from "./MovieBanner";
 // import { DislikeOutlined, LikeOutlined, DislikeFilled, LikeFilled } from '@ant-design/icons';
 
 const PageReview = () => {
+    let token = localStorage.getItem("token")
     let {id} = useParams()
     const dispatch = useDispatch()
     const [review, setReview] = useState({
         comment: "",
-        rating: 1
+        rating: null
     })
     const data = review
     const reviews= useSelector(state => state.review.comments)
+    const [value, setValue] = useState()
+    
     // console.log("komen", reviews)
+
+    const handleChange = value => {
+        // dispatch(postRating(id, rating))
+        console.log(value)
+        setValue(value)
+        setReview({rating: value})
+    }
 
     console.log(id, data)
     useEffect(() => {
@@ -43,16 +54,24 @@ const PageReview = () => {
     }
 
     const handleSubmit = () => {
+        handleError()
         dispatch(postReview(id, data))
+        setReview({comment:" "})
     }
 
+    const handleError = () => {
+        if (token===null) {
+            alert("please sign in first")
+        }
+    }
     return(
         <div>
             <Form>
                 <Form.Item
                     name="comment"
-                    rules={[{ required: true, message: 'Please input your review!' }]}
+                    // rules={[{ required: true, message: 'Please input your review!' }]}
                 >
+                    <Rate allowHalf value={value} onChange={handleChange} />
                     <Input placeholder="Add your review..." allowClear value={review.comment}  name="comment" onChange={handleInput} />
                 </Form.Item>
                 <Form.Item>
@@ -63,15 +82,19 @@ const PageReview = () => {
                 {reviews.length ?
                     reviews.map(item => 
                         <Comment
-                            author={<a>Anonymous User</a>}
+                            author={<p>{item.User.name}</p>}
                             avatar={
                                 <Avatar
-                                src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"
+                                src={item.User.Image.url}
                                 alt="Han Solo"
                                 />
                             }
                             content={
-                                <p>{item.comment}</p>  
+                                <div>
+                                    <p>{item.comment}</p>
+                                    <Rate disabled value={item.rating}/>
+                                </div>
+                                  
                             }
                         />
                     )

@@ -10,7 +10,7 @@ export const getProfile = () => async dispatch => {
                 auth: token
             }
         })
-        console.log('getprofile', res.data.data)
+        // console.log('getprofile', res.data.data)
         dispatch({
             type: GET_PROFILE,
             payload: res.data.data
