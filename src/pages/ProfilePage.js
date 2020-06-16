@@ -1,69 +1,106 @@
-import React, {useState} from "react";
-import { useSelector } from "react-redux";
+import React, { useState, useEffect} from "react";
+import { useSelector, useDispatch } from "react-redux";
 import "../assets/css/profile.scss";
 import "../../node_modules/antd/dist/antd.css";
-import { Layout, Menu, Row, Col, Avatar, /*Card, Rate,*/ Modal, Upload, Button, Input /*Breadcrumb*/ } from 'antd';
-import { UserOutlined, LaptopOutlined, NotificationOutlined, UploadOutlined } from '@ant-design/icons';
+import axios from "axios";
+import { Layout, Menu, Row, Col, Avatar, message, /*Card, Rate,*/ Modal, Upload, Button, Input, Progress, Tooltip /*Breadcrumb*/ } from 'antd';
+import { UserOutlined, LaptopOutlined, NotificationOutlined, EditOutlined } from '@ant-design/icons';
+import { editProfile } from "../stores/actions/updateprofile";
+import { getWatchlist } from "../stores/actions/userdata"
 // import UpdateProfile from '../components/UpdateProfile'
 // import {getProfile} from "../stores/actions/userdata"
+const token = localStorage.getItem('token')
 
 const ProfilePage = () => {
-    const { SubMenu } = Menu;
+    // const { SubMenu } = Menu;
     const { Content, Sider } = Layout;
     // const {Meta} = Card;
     const [showModalProfile, setShowModalProfile] = useState(false)
-    // const [confirmLoading, setConfirmLoading] = useState(false)
-    // const dispatch = useDispatch()
+    const [defaultFileList, setDefaultFileList] = useState([]);
+    const [progress, setProgress] = useState(0);
+    const dispatch = useDispatch()
     const userdata = useSelector(state => state.userdata.profile)
-    const updateProfile = useSelector(state => state.updateProfile.name)
-    const [data, setdata] = useState(
-        {
-            name: '',
-            image: '',
-        }
-    )
+    const [name, setname] = useState()
 
+    const handleOnChange = ({ file, fileList, event }) => {
+        // console.log(file, fileList, event);
+        //Using Hooks to update the state to the current filelist
+        setDefaultFileList(fileList);
+        //filelist - [{uid: "-1",url:'Some url to image'}]
+      };
+
+    useEffect(() => {
+        dispatch(getWatchlist())
+    }, [])
+  
+    const uploadImage = async options => {
+    const { onSuccess, onError, file, onProgress } = options;
+    const fmData = new FormData();
+    const config = {
+        headers: { auth: token },
+        onUploadProgress: event => {
+        const percent = Math.floor((event.loaded / event.total) * 100);
+        setProgress(percent);
+        if (percent === 100) {
+            setTimeout(() => setProgress(0), 1000);
+        }
+        onProgress({ percent: (event.loaded / event.total) * 100 });
+        }
+    };
+    fmData.append("image", file);
+    try {
+        const res = await axios.put(
+        "https://ga-moviereview.herokuapp.com/api/v1/user",
+        fmData,
+        config
+        );
+        onSuccess("Ok");
+        console.log("server res: ", res);
+    } catch (err) {
+        console.log("Eroor: ", err);
+        const error = new Error("Some error");
+        onError({ error });
+    }
+    };  
+    
     const handleInput = e => {
-        setdata({
-            ...data,
+        setname({
+            ...name,
             [e.target.name]: e.target.value
         })
     }
 
-    console.log("updateProfile", updateProfile, 'data', data)
-
-    // useEffect(() =>{
-    //     dispatch(getProfile())
-    // }, [getProfile])
-
-    // const updateProfile = (
-    //     <Modal
-    //         title="Update Profile"
-    //         visible={setShowModalProfile(true)}
-    //         onCancel={() => setShowModalProfile(false)}
-    //     >
-    //         <p>Test</p>
-    //     </Modal>
-    // )
+    const handleUpdate = e => {
+        dispatch(editProfile(name))
+    }
 
     return(
         <div>
             <Modal
                 title="Update Profile"
                 visible={showModalProfile}
+                onOk={() => handleUpdate()}
                 onCancel={() => setShowModalProfile(false)}
             >
                 {/* <UpdateProfile/> */}
                 <Row style={{marginBottom:'20px'}}>
-                    <p>Username</p>
+                    <p>Usernames</p>
                     <Input name='name' placeholder="Input new username" onChange={handleInput} />
                 </Row>
                     <p>Update profile photo</p>
-                    <Upload {...data} name='image' >
-                        <Button>
-                            <UploadOutlined /> Upload
-                        </Button>
-                    </Upload>
+                    <div class="container">
+                        <Upload
+                        accept="image/*"
+                        customRequest={uploadImage}
+                        onChange={handleOnChange}
+                        listType="picture-card"
+                        defaultFileList={defaultFileList}
+                        className="image-upload-grid"
+                        >
+                        {defaultFileList.length >= 1 ? null : <div>Upload Button</div>}
+                        </Upload>
+                        {progress > 0 ? <Progress percent={progress} /> : null}
+                    </div>
             </Modal>
             <Layout>
                 <Content style={{ padding: '0 50px', background:"#191919" }}>
@@ -75,8 +112,10 @@ const ProfilePage = () => {
                 <Layout className="site-layout-background main-section-wrapper" style={{ padding: '24px 0', background:"#262626", color:"#858585" }}>
                     <Sider className="site-layout-background" width={200} style={{height: "fit-content", background:"#262626"}}>
                         <Col style={{textAlign:"center"}}>
+                        <Tooltip title="Click to edit profile" placement='right'>
                              <Avatar size={80} src={userdata? userdata.image : <UserOutlined/>} onClick={() => setShowModalProfile(true)} className="profile-photo" />
-                             <p style={{paddingTop: '10px', fontSize:'22px'}}>{userdata? userdata.name : ""}</p>
+                        </Tooltip>
+                             <p style={{paddingTop: '10px', fontSize:'18px', padding:'12px 10px 0px 10px'}}>{userdata? userdata.name : ""}</p>
                         </Col>
                         <Menu
                             mode="inline"
@@ -89,16 +128,16 @@ const ProfilePage = () => {
                                 icon={<UserOutlined />} 
                                 title="subnav 1"> */}
                             <Menu.Item key="1">My Watchlist</Menu.Item>
-                            <Menu.Item key="2">Continue to Watch</Menu.Item>
-                            <Menu.Item key="3">Most Watched</Menu.Item>
-                            <Menu.Item key="4">Suggestions</Menu.Item>
+                            <Menu.Item key="2">My Review</Menu.Item>
+                            {/* <Menu.Item key="3">Most Watched</Menu.Item>
+                            <Menu.Item key="4">Suggestions</Menu.Item> */}
                             {/* </SubMenu> */}
-                            <SubMenu key="sub2" icon={<LaptopOutlined />} title="subnav 2">
+                            {/* <SubMenu key="sub2" icon={<LaptopOutlined />} title="subnav 2">
                             <Menu.Item key="5">option5</Menu.Item>
                             </SubMenu>
                             <SubMenu key="sub3" icon={<NotificationOutlined />} title="subnav 3">
                             <Menu.Item key="6">option6</Menu.Item>
-                            </SubMenu>
+                            </SubMenu> */}
                         </Menu>
                     </Sider>
                     <Content style={{ padding: '0 24px', minHeight: 280, width:"50%", background:"#262626", color:"#858585" }}>

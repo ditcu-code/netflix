@@ -28,5 +28,32 @@
 .moviePagination{
     background-color: #191919;
     text-align: center;
-    padding: 1em 0 1em 0;
+    padding: 0em 0 1em 0;
+    .ant-pagination-item:hover{
+        border: 1px solid #ffffff;
+    }
+    .ant-pagination-item{
+        background-color: #191919;
+        border-radius: 10px;
+        margin: 0 5px;
+        a{
+            color: #858585;
+        }
+    }
+    .ant-pagination-item-active{
+        background-color: #191919;
+        border: 2px solid #E50914;
+        a {
+            font-weight: 900;
+            color: #E50914;
+        }
+    }
+    .ant-pagination-prev .ant-pagination-item-link, .ant-pagination-next .ant-pagination-item-link {
+        border-radius: 20px;
+        background-color: #191919;
+        color: #ffffff;
+    }
+    .ant-pagination-prev, .ant-pagination-next{
+        margin: 0 10px;
+    }
 }

@@ -1,9 +1,9 @@
 const baseUrl = 'https://ga-moviereview.herokuapp.com/api/v1';
 
-export const movieList = () => async dispatch => {
+export const movieList = (key) => async dispatch => {
   try {
     const getMovieRes = await fetch(
-      `${baseUrl}/movie/?limit=5&page=1`,
+      `${baseUrl}/movie/?limit=10&page=${key}`,
       {
         method: "GET",
         headers: {
