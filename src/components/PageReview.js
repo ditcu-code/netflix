@@ -1,12 +1,19 @@
-import React from "react";
+import React, {useState, useEffect} from "react";
 import "../assets/css/pageoverview.scss";
-import {Link} from "react-router-dom";
+import {useParams} from "react-router-dom";
+import {reviewList} from "../stores/actions/review";
+import {useDispatch, useSelector} from "react-redux";
+import {postReview} from "../stores/actions/review";
 import {
     Row, 
     Col, 
     Divider, 
     Comment,
     Avatar,
+    Form,
+    Input,
+    Button,
+    Rate,
     Tooltip
 } from "antd";
 import "../../node_modules/antd/dist/antd.css"
@@ -14,65 +21,100 @@ import MovieBanner from "./MovieBanner";
 // import { DislikeOutlined, LikeOutlined, DislikeFilled, LikeFilled } from '@ant-design/icons';
 
 const PageReview = () => {
+    let token = localStorage.getItem("token")
+    let {id} = useParams()
+    const dispatch = useDispatch()
+    const [review, setReview] = useState({
+        comment: "",
+        rating: null
+    })
+    const data = review
+    const reviews= useSelector(state => state.review.comments)
+    const [value, setValue] = useState()
     
+    // console.log("komen", reviews)
+
+    const handleChange = value => {
+        // dispatch(postRating(id, rating))
+        console.log(value)
+        setValue(value)
+        setReview({rating: value})
+    }
+
+    console.log(id, data)
+    useEffect(() => {
+        dispatch(reviewList(id))
+    }, [])
+    
+    const handleInput = e => {
+        setReview({
+            ...review,
+            [e.target.name]: e.target.value
+        })
+    }
+
+    const handleSubmit = () => {
+        handleError()
+        dispatch(postReview(id, data))
+        setReview({comment:" "})
+    }
+
+    const handleError = () => {
+        if (token===null) {
+            alert("please sign in first")
+        }
+    }
     return(
         <div>
-            <MovieBanner/>
-            <Row>
-                <Col span={1}></Col>
-                <Col span={4}><Link to="/overview">Overview</Link></Col>
-                <Col span={4}><Link to="/actors">Actors</Link></Col>
-                <Col span={4}><Link to="/reviews">Reviews</Link></Col>
-            </Row>
+            <Form>
+                <Form.Item
+                    name="comment"
+                    // rules={[{ required: true, message: 'Please input your review!' }]}
+                >
+                    <Rate allowHalf value={value} onChange={handleChange} />
+                    <Input placeholder="Add your review..." allowClear value={review.comment}  name="comment" onChange={handleInput} />
+                </Form.Item>
+                <Form.Item>
+                    <Button type="primary" htmlType="submit" onClick={handleSubmit}>Submit</Button>
+                </Form.Item>
+            </Form>
             <div>
-                <Comment
-                    author={<a>Han Solo</a>}
-                    avatar={
-                        <Avatar
-                        src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"
-                        alt="Han Solo"
+                {reviews.length ?
+                    reviews.map(item => 
+                        <Comment
+                            author={<p>{item.User.name}</p>}
+                            avatar={
+                                <Avatar
+                                src={item.User.Image.url}
+                                alt="Han Solo"
+                                />
+                            }
+                            content={
+                                <div>
+                                    <p>{item.comment}</p>
+                                    <Rate disabled value={item.rating}/>
+                                </div>
+                                  
+                            }
                         />
-                    }
-                    content={
-                        <p>
-                        We supply a series of design principles, practical patterns and high quality design
-                        resources (Sketch and Axure), to help people create their product prototypes beautifully
-                        and efficiently.
-                        </p>
-                    }
-                />
-                <Comment
-                    author={<a>Ben Solo</a>}
-                    avatar={
-                        <Avatar
-                        src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"
-                        alt="Han Solo"
-                        />
-                    }
-                    content={
-                        <p>
-                        We supply a series of design principles, practical patterns and high quality design
-                        resources (Sketch and Axure), to help people create their product prototypes beautifully
-                        and efficiently.
-                        </p>
-                    }
-                />
-                <Comment
-                    author={<a>Leia Solo</a>}
-                    avatar={
-                        <Avatar
-                        src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"
-                        alt="Han Solo"
-                        />
-                    }
-                    content={
-                        <p>
-                        We supply a series of design principles, practical patterns and high quality design
-                        resources (Sketch and Axure), to help people create their product prototypes beautifully
-                        and efficiently.
-                        </p>
-                    }
-                />
+                    )
+                    :
+                    <p>No reviews yet.</p>
+                } 
+                {/* {reviews.map(item => 
+                    <Comment
+                        author={<a>Han Solo</a>}
+                        avatar={
+                            <Avatar
+                            src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"
+                            alt="Han Solo"
+                            />
+                        }
+                        content={
+                            <p>{item.comment}</p>  
+                        }
+                    /> 
+                )} */}
             </div>
         </div>
     )

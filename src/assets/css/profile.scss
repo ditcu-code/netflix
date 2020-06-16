@@ -1,12 +1,24 @@
 .main-section-wrapper{
     // margin: 2rem 0;
     border-radius: 20px;
+    .ant-menu-item-selected{
+        color: #E50914;
+    }
+    .ant-menu:not(.ant-menu-horizontal) .ant-menu-item-selected{
+        background-color: #191919;
+    }
+    .ant-menu-vertical-right .ant-menu-item::after, .ant-menu-inline .ant-menu-item::after{
+        border-right: 3px solid #E50914;
+    }
+    .ant-menu-item:hover, .ant-menu-item-active{
+        color: #ffffff;
+    }
 }
 
 // img {
 //     height: 150px;
 // }
 
-.profile-photo:hover {
-    cursor: pointer;
-}
+    .profile-photo:hover {
+        cursor: pointer;
+    }

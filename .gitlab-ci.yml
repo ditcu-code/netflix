@@ -1,19 +1,48 @@
-image: node:8.15.1
+# image: node:8.15.1
 
-stages:
-  - build
-  - staging
-  - production
+# stages:
+#   - build
+#   - staging
+#   - production
 
-deploy-to-development:
-  type: build
-  script:
-    - npm install
-    - npm run build
-  except:
-    - develop
-    - master
+# deploy-to-development:
+#   type: build
+#   script:
+#     - npm install
+#     - npm run build
+#   except:
+#     - develop
+#     - master
 
+<<<<<<< HEAD
+# deploy-to-staging:
+#   type: deploy
+#   stage: staging
+#   environment:
+#     name: staging
+#     url: https://staging-netflix.herokuapp.com/
+#   script:
+#     - apt-get update -qy
+#     - apt-get install -y ruby ruby-dev rubygems-integration
+#     - gem install dpl
+#     - dpl --provider=heroku --app=NETFLIX_STAGING_APP --api-key=80e04161-5631-43d0-9b6b-4ee0ef01f6c7
+#   only:
+#     - develop
+    
+# deploy-production:
+#   type: deploy
+#   stage: production
+#   environment:
+#     name: production
+#     url: https://netflix-movie-reviews.herokuapp.com/
+#   script:
+#     - apt-get update -qy
+#     - apt-get install -y ruby ruby-dev rubygems-integration
+#     - gem install dpl
+#     - dpl --provider=heroku --appNETFLIX_PRODUCTION_APP --api-key=80e04161-5631-43d0-9b6b-4ee0ef01f6c7
+#   only:
+#     - master
+=======
 deploy-to-staging:
   type: deploy
   stage: staging
@@ -24,9 +53,9 @@ deploy-to-staging:
     - apt-get update -qy
     - apt-get install -y ruby ruby-dev rubygems-integration
     - gem install dpl
-    - dpl --provider=heroku --app=NETFLIX_STAGING_APP --api-key=80e04161-5631-43d0-9b6b-4ee0ef01f6c7
+    - dpl --provider=heroku --app=staging-netflix --api-key=80e04161-5631-43d0-9b6b-4ee0ef01f6c7
   only:
-    - develop
+    - staging
     
 deploy-production:
   type: deploy
@@ -38,6 +67,7 @@ deploy-production:
     - apt-get update -qy
     - apt-get install -y ruby ruby-dev rubygems-integration
     - gem install dpl
-    - dpl --provider=heroku --appNETFLIX_PRODUCTION_APP --api-key=80e04161-5631-43d0-9b6b-4ee0ef01f6c7
+    - dpl --provider=heroku --app=netflix-movie-reviews --api-key=80e04161-5631-43d0-9b6b-4ee0ef01f6c7
   only:
     - master
+>>>>>>> 609cfbf5625fa5d57aafe61222a3f945eb3c08f3
