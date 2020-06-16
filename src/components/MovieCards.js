@@ -16,12 +16,6 @@ const MovieCards = () => {
     const moviebygenre = useSelector(state => state.movies.moviebygenre)
     const dispatch = useDispatch()
     const [genreId, setgenreId] = useState(28); useParams()
-    const [page, setPage] = useState(
-        {
-        minValue: 0,
-        maxValue: 6
-        }
-    );
     // let {id} = useParams()
     
     useEffect(() => {
@@ -35,23 +29,29 @@ const MovieCards = () => {
       }
       })
 
-    const handleChange = item => {
-        if (item <= 1) {
-          setPage({
-            minValue: 0,
-            maxValue: 6
-          });
-        } else {
-          setPage({
-            minValue: page.maxValue,
-            maxValue: item * 6
-          });
-        }
-      };
+    // const handleChange = item => {
+    //     if (item <= 1) {
+    //       setPage({
+    //         minValue: 0,
+    //         maxValue: 6
+    //       });
+    //     } else {
+    //       setPage({
+    //         minValue: page.maxValue,
+    //         maxValue: item * 6
+    //       });
+    //     }
+    //   };
 
     const callback = (key) => {
       setgenreId(key)
       dispatch(getMoviesByGenre(key))
+    }
+
+    const callmovie = (key) => {
+      console.log('key',key)
+      // setPage(key)
+      dispatch(movieList(key))
     }
 
     // console.log('KEYS', genreId, moviebygenre.length)
@@ -60,9 +60,9 @@ const MovieCards = () => {
           <Link to={`/overview/${item.id}`} key={item.id} >
             <Card
                 hoverable
-                cover={<img alt={item.title} src={item.Images[0].url} />}
+                cover={<img alt={item.title} src={item.Images[1].url} />}
                 >
-                <Meta title={item.title} description={item.releaseDate.slice(0,4)} />
+                <Meta title={item.title} description={item.releaseDate!=null ? item.releaseDate.slice(0,4) : "2010"} />
             </Card>
           </Link>
     );
@@ -71,9 +71,9 @@ const MovieCards = () => {
       <Link to={`/overview/${item.id}`} key={item.id} >
         <Card
             hoverable
-            cover={<img alt={item.title} src={item.Images[0].url} />}
+            cover={<img alt={item.title} src={item.Images[1].url} />}
         >
-          <Meta title={item.title} description={item.releaseDate} />
+          <Meta title={item.title} description={item.releaseDate!=null ? item.releaseDate.slice(0,4) : "2010"} />
         </Card>
       </Link>
     );
@@ -94,6 +94,9 @@ const MovieCards = () => {
           <Col span={24} className='movieCards' >
               {movieItem}
           </Col>
+          <Col span={24} className='moviePagination' >
+              <Pagination onChange={callmovie} defaultCurrent={1} total={50} defaultPageSize={10} />
+          </Col>
           <Row className='movieGenres'>
             <Col span={5}>
               <Title><TagsOutlined /> Genres</Title>
@@ -106,9 +109,6 @@ const MovieCards = () => {
           </Row>
           <Col span={24} className='movieCards' >
             {moviebygenreItem}
-          </Col>
-          <Col span={24} className='moviePagination' >
-              <Pagination defaultCurrent={1} total={24} defaultPageSize={6} onChange={handleChange}/>
           </Col>
         </Col>
       </div>

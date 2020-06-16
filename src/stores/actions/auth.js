@@ -29,7 +29,7 @@ export const register = data => async dispatch => {
   console.log('reg called')
   try{
     const res = await axios.post(`${baseUrl}/user/register`, data)
-    localStorage.setItem("token", res.data.token)
+    localStorage.setItem("token", res.data.data.token)
     dispatch({
       type: LOGIN_SUCCESS
     })
