@@ -26,6 +26,8 @@ const MovieBanner = () => {
     const reviews = useSelector (state => state.review.count)
     // console.log("ratingres", rating)
 
+    
+    console.log("value", rating)
     useEffect(() => {
         if (IdChange === false) { //aku bikin ini biar ga looping
             dispatch(reviewList(id)) //id nya bonceng dispatch 
@@ -56,7 +58,7 @@ const MovieBanner = () => {
             <Row>
                 <Col span={1}></Col>
                 <Col span={3}>
-                    <Rate allowHalf value={rating / 2} /*blm ada fungsi submit rating*/ />
+                    <Rate disabled allowHalf value={rating} />
                 </Col>
                 <Col span={3}>
                     {reviews>0 ?
